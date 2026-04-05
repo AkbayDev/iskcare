@@ -467,20 +467,7 @@
             }
 
             /* 1. Verberg de zwevende review badge volledig */
-    .review-badge-container {
-        display: none !important;
-    }
-
-    /* 2. Verberg de navigatie links in de header */
-    /* We laten de Logo meestal wel staan, maar de links gaan weg */
-    .nav-links {
-        display: none !important;
-    }
-
-    /* Optioneel: Zorg dat de header zelf minder hoog is op mobiel */
-    header {
-        padding: 1rem 5%;
-    }
+   
         }
 
         /* Contact & Opening Hours */
@@ -519,7 +506,7 @@
         }
 
         .hours-note {
-            font-size: 0.4rem;
+            font-size: 0.8rem;
             color: #888174;
             font-style: italic;
             margin-bottom: 1.5rem;
@@ -577,16 +564,6 @@
     box-shadow: 0 8px 25px rgba(229, 206, 185, 0.4);
   }
 
-/* Op hele kleine telefoons maken we hem iets compacter */
-@media (max-width: 480px) {
-    .review-badge {
-        padding: 0.6rem 1rem;
-        bottom: 15px;
-        right: 15px;
-    }
-    .badge-text span { display: none; } /* Verbergt "(120+ ervaringen)" op kleine schermen */
-}
-
 .badge-stars {
     letter-spacing: 2px;
     font-size: 1.1rem;
@@ -613,12 +590,19 @@
     display: flex;
     align-items: center;
 }
-
-/* Mobiele optimalisatie */
-@media (max-width: 600px) {
-    .review-badge {
-        padding: 0.8rem 1.2rem;
-        gap: 0.8rem;
+@media (max-width: 768) {
+     .review-badge-container {
+        display: none !important;
     }
-    .badge-stars { font-size: 0.9rem; }
+
+    /* 2. Verberg de navigatie links in de header */
+    /* We laten de Logo meestal wel staan, maar de links gaan weg */
+    .nav-links {
+        display: none !important;
+    }
+
+    /* Optioneel: Zorg dat de header zelf minder hoog is op mobiel */
+    header {
+        padding: 1rem 5%;
+    }
 }
