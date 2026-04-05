@@ -36,8 +36,6 @@ const translations = {
                 { day: "Sunday", time: "11:00 - 15:00*" }
             ],
             hoursNote: "* Open two Sundays a month; flexible hours and open on several public holidays to adapt to client schedules.",
-            promiseTitle: "Our Promise:",
-            promiseText: "✨ Votre beauté, à votre rythme ✨. We know life gets busy. That's why we offer late evening hours during the week, Sunday availability, and tailored scheduling. We work closely with our clients to understand their specific needs and offer the most perfectly adapted solutions."
         },
         footer: "All rights reserved.",
         categories: {
@@ -204,8 +202,6 @@ const translations = {
                 { day: "Dimanche", time: "11:00 - 15:00*" }
             ],
             hoursNote: "* Ouvert deux dimanches par mois ; horaires flexibles et ouvert certains jours fériés pour s'adapter aux emplois du temps de nos clients.",
-            promiseTitle: "Notre promesse :",
-            promiseText: "✨ Votre beauté, à votre rythme ✨. Nous savons que la vie est bien remplie. C'est pourquoi nous proposons des horaires en fin de soirée la semaine, une disponibilité le dimanche et une planification sur mesure. Nous travaillons en étroite collaboration avec nos clients pour comprendre leurs besoins spécifiques et proposer les solutions les plus parfaitement adaptées."
         },
         footer: "Tous droits réservés.",
         categories: {
@@ -351,7 +347,7 @@ export default function App() {
     const t = translations[lang];
 
     // Booking platform URL
-    const bookingUrl = "https://example.com/book";
+    const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
 
     // Handle scroll effects for the sticky header
     useEffect(() => {
@@ -375,47 +371,47 @@ export default function App() {
         {
             id: 'korean-advanced',
             icon: "🆕",
-            img: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/korean.webp"
         },
         {
             id: 'deep-anti-aging',
             icon: "✨",
-            img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/deepantiage.webp"
         },
         {
             id: 'chemical-peels',
             icon: "🧪",
-            img: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/chemicalpeals.webp" // Lokale afbeelding in de public map
         },
         {
             id: 'classic-facials',
             icon: "💆‍♀️",
-            img: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/classic.webp"
         },
         {
             id: 'waxing-services',
             icon: "🍯",
-            img: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/waxing.webp"
         },
         {
             id: 'waxing-packages',
             icon: "📦",
-            img: "https://images.unsplash.com/photo-1560944527-a4a429848866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/waxing2.webp"
         },
         {
             id: 'eye-beauty',
             icon: "👁️",
-            img: "https://images.unsplash.com/photo-1512496015851-a1cbfbea25eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/eye.webp"
         },
         {
             id: 'hand-foot-beauty',
             icon: "💅",
-            img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/nails.webp"
         },
         {
             id: 'makeup-bridal',
             icon: "💄",
-            img: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            img: "/images/makeup.webp"
         }
     ];
 
@@ -433,10 +429,11 @@ export default function App() {
                     <a href="#contact" className="contact-link" onClick={(e) => { e.preventDefault(); setSelectedCategory(null); }}>{t.nav.contact}</a>
                     
                     <div className="social-icons" style={{ margin: '0 0 0 1.5rem', gap: '0.8rem' }}>
-                        <a href="#" aria-label="Facebook">
+                        <a href="https://www.facebook.com/InstitutSkinCareProject" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
                         </a>
-                        <a href="#" aria-label="Instagram">
+
+                        <a href="https://www.instagram.com/iskcare" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                         </a>
                     </div>
@@ -469,7 +466,7 @@ export default function App() {
                     </div>
                     <div className="hero-image-wrapper">
                         {/* 4. We gebruiken standaard img tags hier. Next.js heeft ook een <Image /> component voor nog snellere laadtijden, maar dit werkt perfect voor nu. */}
-                        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Luxurious Skincare Products" />
+                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" />
                     </div>
                 </section>
 
@@ -487,7 +484,7 @@ export default function App() {
                                     <article className="service-card" key={cat.id} onClick={() => setSelectedCategory(cat.id)}>
                                         <div className="service-image">
                                             <img src={cat.img} alt={t.categories[cat.id].title} />
-                                            <div className="service-icon">{cat.icon}</div>
+                                            
                                         </div>
                                         <div className="service-content">
                                             <h3>{t.categories[cat.id].title}</h3>
@@ -568,7 +565,7 @@ export default function App() {
                                 </span>
                             </p>
                         </div>
-                        <div className="contact-info">
+                        <div className="contact-hours">
                             <h4 className="opening-hours-title">🕒 {t.contact.hoursTitle}</h4>
                             <div className="hours-grid">
                                 {t.contact.hours.map((h, idx) => (
@@ -579,19 +576,15 @@ export default function App() {
                                 ))}
                             </div>
                             <p className="hours-note">{t.contact.hoursNote}</p>
-                            <div className="promise-box">
-                                <strong>{t.contact.promiseTitle}</strong>
-                                {t.contact.promiseText}
-                            </div>
                         </div>
                         <div className="contact-map">
                             {/* Google Maps Embed - Pas de link src=".." aan in je echte map! */}
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.467888796245!2d4.3855073157456!3d50.83226956701831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c4b1216d7d6f%3A0xc3c544e311f6217c!2sRue%20de%20Ramskapelle%202%2C%201040%20Etterbeek%2C%20Belgium!5e0!3m2!1sen!2sbe!4v1711200000000!5m2!1sen!2sbe"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d488.6690063245935!2d4.400877082023608!3d50.83017508223242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project%20(%20Ladies%20only)!5e0!3m2!1snl!2sbe!4v1775423615423!5m2!1snl!2sbe"
                                 width="100%" 
                                 height="100%" 
                                 style={{ border: 0 }} 
-                                allowFullScreen="" 
+                                allowFullScreen={true}
                                 loading="lazy" 
                                 referrerPolicy="no-referrer-when-downgrade">
                             </iframe>
@@ -607,12 +600,34 @@ export default function App() {
                     {lang === 'fr' ? '"Prenez soin de vous aujourd\'hui pour un avenir plus jeune demain !"' : '"Take care of yourself today for a younger future tomorrow!"'}
                 </p>
                 <div className="social-icons" style={{ justifyContent: 'center', marginBottom: '1.5rem' }}>
-                    <a href="#" aria-label="Facebook">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-                    </a>
-                    <a href="#" aria-label="Instagram">
+                    <a href="https://www.facebook.com/InstitutSkinCareProject" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                        </a>
+                        
+                    <a href="https://www.instagram.com/iskcare" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
+                </div>
+                {/* Google Review Badge */}
+                <div className="review-badge-container">
+                  <a 
+                    href="https://www.google.com/search?q=Institut+Skin+Care+Project+Etterbeek#lrd=0x47c3c5300e70e4cd:0x2541e753c3464530,1" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="review-badge"
+                  >
+                    <div className="badge-stars">⭐⭐⭐⭐⭐</div>
+                    <div className="badge-text">
+                      <strong>5 / 5</strong> op Google Reviews
+                      <span>(90+ reviews)</span>
+                    </div>
+                    <div className="badge-icon">
+                      {/* Een simpel Google G-icoontje of een pijltje */}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+                      </svg>
+                    </div>
+                  </a>
                 </div>
                 <p>© 2026 {t.footer}</p>
                 <p>Rue de Ramskapelle 2, 1040 Etterbeek, Belgium</p>

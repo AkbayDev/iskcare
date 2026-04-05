@@ -378,6 +378,18 @@
             border-radius: 24px;
             border: 1px solid var(--borders);
             box-shadow: 0 10px 40px rgba(229, 206, 185, 0.3);
+            height: 450px;
+        }
+        
+        .contact-hours {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--borders);
+            box-shadow: 0 10px 40px rgba(229, 206, 185, 0.3);
+            height: 450px;
         }
 
         .contact-info h3 {
@@ -385,6 +397,12 @@
             margin-bottom: 1.5rem;
             color: var(--heading-color);
         }
+
+       .contact-hours h3 {
+          font-size: 1.8rem;
+          margin-bottom: 1.5rem;
+          color: var(--heading-color);
+       }
 
         .contact-info p {
             font-size: 1.1rem;
@@ -485,27 +503,13 @@
         }
 
         .hours-note {
-            font-size: 0.9rem;
+            font-size: 0.4rem;
             color: #888174;
             font-style: italic;
             margin-bottom: 1.5rem;
             line-height: 1.4;
         }
 
-        .promise-box {
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid #e7bdbf;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .promise-box strong {
-            color: #888174;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
         
         .social-icons {
             display: flex;
@@ -524,3 +528,81 @@
         .social-icons a:hover {
             color: #888174;
         }
+
+
+.review-badge-container {
+    position: fixed; /* Dit laat hem zweven */
+    bottom: 20px;    /* Afstand van de onderkant */
+    right: 20px;     /* Afstand van de rechterkant */
+    z-index: 9999;   /* Zorgt dat hij bovenop alles ligt */
+    pointer-events: none; /* Zorgt dat je nog wel op dingen erachter kunt klikken */
+    padding: 2rem 0;
+    justify-content: center;
+}
+
+.review-badge {
+    pointer-events: auto; /* Zorgt dat de badge zelf wel klikbaar is */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.5rem;
+    background-color: white;
+    border: 1px solid var(--borders); /* Een iets dikkere rand voor extra luxe */
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(229, 206, 185, 0.2);
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-color);
+    text-decoration: none;
+    max-width: 280px;
+}
+
+.review-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(229, 206, 185, 0.4);
+  }
+
+/* Op hele kleine telefoons maken we hem iets compacter */
+@media (max-width: 480px) {
+    .review-badge {
+        padding: 0.6rem 1rem;
+        bottom: 15px;
+        right: 15px;
+    }
+    .badge-text span { display: none; } /* Verbergt "(120+ ervaringen)" op kleine schermen */
+}
+
+.badge-stars {
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+
+.badge-text {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-text strong {
+    color: var(--heading-color);
+}
+
+.badge-text span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.badge-icon {
+    color: var(--brand-accent);
+    display: flex;
+    align-items: center;
+}
+
+/* Mobiele optimalisatie */
+@media (max-width: 600px) {
+    .review-badge {
+        padding: 0.8rem 1.2rem;
+        gap: 0.8rem;
+    }
+    .badge-stars { font-size: 0.9rem; }
+}
