@@ -422,7 +422,7 @@ export default function App() {
         <React.Fragment>
             {/* Header Navigation */}
             <header className={scrolled ? 'scrolled' : ''}>
-                <a href="#" className="logo">InstitutSkinCare Project</a>
+                <a href="#" className="logo">Institut SkinCare Project</a>
                 <nav className="nav-links">
                     <a href="#services">Treatments</a>
                     <a href="#contact">Contact</a>
