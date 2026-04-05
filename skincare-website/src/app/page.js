@@ -425,7 +425,7 @@ export default function App() {
                 <a href="#" className="logo">SkinCare Project</a>
                 <nav className="nav-links">
                     <a href="#" className="active" onClick={(e) => { e.preventDefault(); setSelectedCategory(null); }}>{t.nav.home}</a>
-                    <a href="#services" onClick={(e) => { e.preventDefault(); setSelectedCategory(null); }}>{t.nav.treatments}</a>
+                    <a href="#services">Services</a>
                     <a href="#contact" className="contact-link" onClick={(e) => { e.preventDefault(); setSelectedCategory(null); }}>{t.nav.contact}</a>
                     
                     <div className="social-icons" style={{ margin: '0 0 0 1.5rem', gap: '0.8rem' }}>
