@@ -4,11 +4,30 @@ import React, { useState, useEffect } from 'react';
 
 const translations = {
     en: {
-        nav: { home: "Home", treatments: "Treatments", contact: "Contact" },
+        nav: { home: "Home", treatments: "Treatments", contact: "Contact", expert: "Expert" },
         hero: {
             title: "Reveal Your\nNatural Radiance",
             desc: "\"Take care of yourself today for a younger future tomorrow!\"\n\nExperience luxurious anti-aging facials and bespoke skincare treatments in our calming clinic located in the heart of Etterbeek, Brussels.",
             btn: "Book Your Consultation"
+        },
+        testimonials: {
+            title: "What Our Clients Say",
+            reviews: [
+                { text: "My skin has never looked so glowing and healthy. The anti-aging treatment took years off my face!", author: "Sophie V." },
+                { text: "Professional, calming, and truly bespoke. The Korean skincare therapies are an absolute game changer.", author: "Marie L." },
+                { text: "I struggled with acne for years until I found this clinic. The results after just 3 sessions are incredible.", author: "Emma D." }
+            ]
+        },
+        beforeAfter: {
+            title: "Real Results",
+            desc: "Slide to see the transformation.",
+            before: "Before",
+            after: "After"
+        },
+        expert: {
+            title: "Meet Your Skincare Expert",
+            subtitle: "Your skin's health is my ultimate priority.",
+            desc: "With a deep passion for advanced dermatology and holistic beauty, I founded Institut SkinCare Project to offer treatments that actually work. I specialize in Korean skincare, advanced anti-aging protocols, and personalized care. Every skin is unique, and together we will find the perfect tailored solution to reveal your natural glow.\n\nWelcome to your new beauty haven.",
         },
         services: {
             title: "Our Service Categories",
@@ -37,6 +56,7 @@ const translations = {
             hoursNote: "* Open two Sundays a month; flexible hours and open on several public holidays to adapt to client schedules.",
         },
         footer: "All rights reserved.",
+        mobileSticky: "Book Appointment",
         categories: {
             "korean-advanced": {
                 title: "Korean Treatments & Advanced Therapies",
@@ -170,11 +190,30 @@ const translations = {
         }
     },
     fr: {
-        nav: { home: "Accueil", treatments: "Soins", contact: "Contact" },
+        nav: { home: "Accueil", treatments: "Soins", contact: "Contact", expert: "L'experte" },
         hero: {
             title: "Révélez votre\néclat naturel",
             desc: "\"Prenez soin de vous aujourd'hui pour un avenir plus jeune demain !\"\n\nDécouvrez des soins anti-âge luxueux et des traitements sur mesure dans notre clinique apaisante au cœur d'Etterbeek, Bruxelles.",
             btn: "Réservez votre consultation"
+        },
+        testimonials: {
+            title: "L'avis de nos clientes",
+            reviews: [
+                { text: "Ma peau n'a jamais été aussi éclatante et en bonne santé. Le traitement anti-âge m'a fait rajeunir de plusieurs années !", author: "Sophie V." },
+                { text: "Professionnel, apaisant et vraiment sur mesure. Les soins coréens sont une véritable révélation.", author: "Marie L." },
+                { text: "Je luttais contre l'acné depuis des années avant de trouver cet institut. Les résultats après seulement 3 séances sont incroyables.", author: "Emma D." }
+            ]
+        },
+        beforeAfter: {
+            title: "Résultats réels",
+            desc: "Faites glisser pour voir la transformation.",
+            before: "Avant",
+            after: "Après"
+        },
+        expert: {
+            title: "Rencontrez votre experte beauté",
+            subtitle: "La santé de votre peau est ma priorité absolue.",
+            desc: "Passionnée par la dermatologie avancée et la beauté holistique, j'ai fondé l'Institut SkinCare Project pour offrir des soins qui fonctionnent vraiment. Je suis spécialisée dans les soins coréens, les protocoles anti-âge avancés et les soins personnalisés. Chaque peau est unique, et ensemble, nous trouverons la solution parfaitement adaptée pour révéler votre éclat naturel.\n\nBienvenue dans votre nouveau havre de beauté.",
         },
         services: {
             title: "Nos catégories de services",
@@ -203,6 +242,7 @@ const translations = {
             hoursNote: "* Ouvert deux dimanches par mois ; horaires flexibles et ouvert certains jours fériés pour s'adapter aux emplois du temps de nos clients.",
         },
         footer: "Tous droits réservés.",
+        mobileSticky: "Prendre RDV",
         categories: {
             "korean-advanced": {
                 title: "Soins coréens et thérapies avancées",
@@ -342,11 +382,12 @@ export default function App() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [lang, setLang] = useState('en');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [sliderPos, setSliderPos] = useState(50); // Voor de Before & After slider
     
     const t = translations[lang];
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
+    const whatsappUrl = "https://wa.me/32486218288"; // Voeg hier je nummer in (zonder + of 00)
 
-    // Alleen header transparantie afhandelen, geen parallax of scroll-animaties meer.
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
@@ -390,6 +431,7 @@ export default function App() {
 
                 <nav className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
                     <a href="#services" onClick={closeMobileMenu}>{t.nav.treatments}</a>
+                    <a href="#expert" onClick={closeMobileMenu}>{t.nav.expert}</a>
                     <a href="#contact" onClick={closeMobileMenu}>{t.nav.contact}</a>
                     
                     <div className="social-icons" style={{ margin: '0 0 0 1.5rem', gap: '0.8rem' }}>
@@ -418,7 +460,41 @@ export default function App() {
                     </div>
                     
                     <div className="hero-image-wrapper floating-wrapper">
-                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" />
+                        <img src="/images/salon.webp" alt="Luxurious Skincare Products" />
+                    </div>
+                </section>
+
+
+                {/* NIEUW: Before & After Slider */}
+                <section className="before-after-section">
+                    <h2>{t.beforeAfter.title}</h2>
+                    <p style={{ marginBottom: '2rem' }}>{t.beforeAfter.desc}</p>
+                    
+                    <div className="slider-container">
+                        {/* 1. Voeg een before.webp foto toe in je images map! */}
+                        <img src="/images/after.webp.png" alt="Before treatment" className="image-after" />
+                        
+                        {/* 2. Voeg een after.webp foto toe in je images map! (Zelfde afmetingen als before) */}
+                        <img 
+                            src="/images/before.webp.jpg" 
+                            alt="After treatment" 
+                            className="image-before" 
+                            style={{ clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)` }}
+                        />
+                        
+                        <input 
+                            type="range" 
+                            min="0" max="100" 
+                            value={sliderPos} 
+                            onChange={(e) => setSliderPos(e.target.value)} 
+                            className="slider-input"
+                        />
+                        <div className="slider-line" style={{ left: `${sliderPos}%` }}>
+                            <div className="slider-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--heading-color)" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--heading-color)" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -486,6 +562,19 @@ export default function App() {
                     )}
                 </section>
 
+                {/* NIEUW: Meet the Expert Sectie */}
+                <section className="expert" id="expert">
+                    <div className="expert-content">
+                        <h2>{t.expert.title}</h2>
+                        <h3>{t.expert.subtitle}</h3>
+                        <p style={{ whiteSpace: 'pre-line' }}>{t.expert.desc}</p>
+                    </div>
+                    <div className="expert-image">
+                        {/* 3. Voeg een mooie portretfoto toe in je images map! */}
+                        <img src="/images/hero.webp" alt="Skincare Expert" />
+                    </div>
+                </section>
+
                 <section className="contact" id="contact">
                     <h2>{t.contact.title}</h2>
                     <p style={{ maxWidth: '600px', margin: '0 auto' }}>{t.contact.desc}</p>
@@ -518,7 +607,7 @@ export default function App() {
                 </section>
             </main>
 
-            <footer style={{ backgroundColor: 'var(--primary-bg)', textAlign: 'center', padding: '4rem 5%', borderTop: '1px solid var(--borders)' }}>
+            <footer style={{ backgroundColor: 'var(--primary-bg)', textAlign: 'center', padding: '4rem 5% 6rem', borderTop: '1px solid var(--borders)' }}>
                 <p style={{ fontWeight: '500', color: 'var(--heading-color)', marginBottom: '0.5rem', fontSize: '1.2rem' }}>Institut SkinCare Project</p>
                 <p style={{ color: '#888174', fontStyle: 'italic', marginBottom: '1.5rem' }}>
                     {lang === 'fr' ? '"Prenez soin de vous aujourd\'hui pour un avenir plus jeune demain !"' : '"Take care of yourself today for a younger future tomorrow!"'}
@@ -531,6 +620,8 @@ export default function App() {
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
                 </div>
+                
+                {/* Google Review Badge Desktop */}
                 <div className="review-badge-container">
                   <a href="https://www.google.com/search?q=Institut+Skin+Care+Project+Etterbeek#lrd=0x47c3c5300e70e4cd:0x2541e753c3464530,1" target="_blank" rel="noopener noreferrer" className="review-badge">
                     <div className="badge-stars">⭐⭐⭐⭐⭐</div>
@@ -545,6 +636,21 @@ export default function App() {
                     </div>
                   </a>
                 </div>
+
+                {/* NIEUW: Zwevende WhatsApp Knop */}
+                <a href={whatsappUrl} className="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+                    <svg viewBox="0 0 32 32" width="32" height="32" fill="white">
+                        <path d="M16.002 0c-8.835 0-16 7.165-16 16 0 2.82.735 5.56 2.135 8.012l-2.115 7.733 7.915-2.077c2.395 1.282 5.096 1.96 7.868 1.96h.005c8.832 0 16-7.165 16-16s-7.17-16-16.008-16zm8.13 22.955c-.342.964-1.956 1.83-2.734 1.93-.733.093-1.637.245-4.832-1.077-3.86-1.597-6.326-5.545-6.52-5.8-.19-.258-1.558-2.075-1.558-3.957 0-1.882.983-2.81 1.332-3.187.35-.378.765-.472 1.023-.472.257 0 .515.004.737.014.23.01.543-.09.848.65.31.753 1.054 2.57 1.144 2.76.092.188.152.41.026.66-.122.253-.186.41-.373.63-.187.218-.396.47-.565.65-.187.195-.386.41-.17.783.216.37 1.034 1.705 2.247 2.785 1.567 1.396 2.89 1.83 3.264 2.016.374.19.59.158.81-.093.22-.25 1.032-1.203 1.31-1.616.276-.413.553-.346.892-.22.34.125 2.146 1.01 2.515 1.196.37.19.615.285.706.442.09.158.09 1.02-.25 1.984z"></path>
+                    </svg>
+                </a>
+
+                {/* NIEUW: Sticky Boekingsbalk voor Mobiel */}
+                <div className="mobile-sticky-bar">
+                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-shine">
+                        {t.mobileSticky}
+                    </a>
+                </div>
+
                 <p>© 2026 {t.footer}</p>
                 <p>Rue de Ramskapelle 2, 1040 Etterbeek, Belgium</p>
             </footer>
