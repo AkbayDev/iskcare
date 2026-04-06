@@ -164,7 +164,8 @@ nav a.contact-link { color: var(--brand-accent); font-weight: bold; }
     position: fixed; width: 60px; height: 60px; bottom: 20px; left: 20px;
     background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center;
     font-size: 30px; box-shadow: 0px 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000;
-    display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+     align-items: center; justify-content: center; transition: all 0.3s ease;
+    display: none; /* DIT IS AANGEPAST VAN FLEX NAAR NONE */
 }
 .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0px 6px 20px rgba(37, 211, 102, 0.6); }
 
@@ -206,7 +207,7 @@ nav a.contact-link { color: var(--brand-accent); font-weight: bold; }
     .review-badge-container { display: none !important; }
     
     /* WhatsApp button slightly higher to make room for Sticky Bar */
-    .whatsapp-float { bottom: 90px; width: 50px; height: 50px; }
+    .whatsapp-float { bottom: 90px; width: 50px; height: 50px; display: flex;}
     .whatsapp-float svg { width: 26px; height: 26px; }
 
     /* Sticky Mobile Book Bar visible on mobile */
