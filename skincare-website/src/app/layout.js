@@ -21,6 +21,13 @@ export const metadata = {
     siteName: "Institut SkinCare Project",
     locale: "fr_BE",
     type: "website",
+    images: [
+      {
+        url: '/images/hero.webp', // Zorg dat dit een mooie foto is voor als mensen je link delen op WhatsApp/Facebook
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 

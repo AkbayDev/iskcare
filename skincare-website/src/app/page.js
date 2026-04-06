@@ -1,6 +1,6 @@
-"use client"; // 1. Dit is nieuw! Het vertelt Next.js dat we hooks (useState, useEffect) gebruiken.
+"use client";
 
-import React, { useState, useEffect } from 'react'; // 2. De juiste manier van importeren in Next.js
+import React, { useState, useEffect } from 'react';
 
 // Jouw vertalingen blijven precies hetzelfde
 const translations = {
@@ -338,27 +338,44 @@ const translations = {
     }
 };
 
-// 3. De Next.js manier om je hoofdcomponent te exporteren
 export default function App() {
     const [scrolled, setScrolled] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [lang, setLang] = useState('en');
     
+    // Nieuwe state voor mobiel menu & parallax
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [offsetY, setOffsetY] = useState(0);
+    
     const t = translations[lang];
-
-    // Booking platform URL
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
 
-    // Handle scroll effects for the sticky header
+    // Scroll listener voor header, parallax en scroll-reveals
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
+            setOffsetY(window.scrollY); // Voor Parallax effect
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Scroll to services section when a category is selected/deselected
+    // Observer voor het "fade-in" scroll effect
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                }
+            });
+        }, { threshold: 0.1 }); // Activeert als 10% zichtbaar is
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        return () => observer.disconnect();
+    }, [selectedCategory, lang]); // Opnieuw observeren bij categorie wissel
+
+    // Scroll soepel naar de top van de services sectie bij openen categorie
     useEffect(() => {
         if (selectedCategory !== null) {
             const el = document.getElementById('services');
@@ -366,124 +383,92 @@ export default function App() {
         }
     }, [selectedCategory]);
 
-    // Base list of categories (only visual assets needed here)
     const categories = [
-        {
-            id: 'korean-advanced',
-            icon: "🆕",
-            img: "/images/korean.webp"
-        },
-        {
-            id: 'deep-anti-aging',
-            icon: "✨",
-            img: "/images/deepantiage.webp"
-        },
-        {
-            id: 'chemical-peels',
-            icon: "🧪",
-            img: "/images/chemicalpeals.webp" // Lokale afbeelding in de public map
-        },
-        {
-            id: 'classic-facials',
-            icon: "💆‍♀️",
-            img: "/images/classic.webp"
-        },
-        {
-            id: 'waxing-services',
-            icon: "🍯",
-            img: "/images/waxing.webp"
-        },
-        {
-            id: 'waxing-packages',
-            icon: "📦",
-            img: "/images/waxing2.webp"
-        },
-        {
-            id: 'eye-beauty',
-            icon: "👁️",
-            img: "/images/eye.webp"
-        },
-        {
-            id: 'hand-foot-beauty',
-            icon: "💅",
-            img: "/images/nails.webp"
-        },
-        {
-            id: 'makeup-bridal',
-            icon: "💄",
-            img: "/images/makeup.webp"
-        }
+        { id: 'korean-advanced', icon: "🆕", img: "/images/korean.webp" },
+        { id: 'deep-anti-aging', icon: "✨", img: "/images/deepantiage.webp" },
+        { id: 'chemical-peels', icon: "🧪", img: "/images/chemicalpeals.webp" },
+        { id: 'classic-facials', icon: "💆‍♀️", img: "/images/classic.webp" },
+        { id: 'waxing-services', icon: "🍯", img: "/images/waxing.webp" },
+        { id: 'waxing-packages', icon: "📦", img: "/images/waxing2.webp" },
+        { id: 'eye-beauty', icon: "👁️", img: "/images/eye.webp" },
+        { id: 'hand-foot-beauty', icon: "💅", img: "/images/nails.webp" },
+        { id: 'makeup-bridal', icon: "💄", img: "/images/makeup.webp" }
     ];
 
     const activeCategoryData = selectedCategory ? categories.find(c => c.id === selectedCategory) : null;
     const activeTranslationData = selectedCategory ? t.categories[selectedCategory] : null;
 
+    // Sluit het mobiele menu na een klik
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
     return (
         <React.Fragment>
-            {/* Header Navigation */}
             <header className={scrolled ? 'scrolled' : ''}>
                 <a href="#" className="logo">Institut SkinCare Project</a>
-                <nav className="nav-links">
-                    <a href="#services">Treatments</a>
-                    <a href="#contact">Contact</a>
+                
+                {/* Hamburger Icoon voor Mobiel */}
+                <div 
+                    className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`} 
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <nav className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
+                    <a href="#services" onClick={closeMobileMenu}>{t.nav.treatments}</a>
+                    <a href="#contact" onClick={closeMobileMenu}>{t.nav.contact}</a>
                     
                     <div className="social-icons" style={{ margin: '0 0 0 1.5rem', gap: '0.8rem' }}>
                         <a href="https://www.facebook.com/InstitutSkinCareProject" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
                         </a>
-
                         <a href="https://www.instagram.com/iskcare" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                         </a>
                     </div>
 
                     <div className="lang-toggle">
-                        <button 
-                            className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-                            onClick={() => setLang('en')}
-                        >
-                            EN
-                        </button>
+                        <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => { setLang('en'); closeMobileMenu(); }}>EN</button>
                         <span className="lang-divider">|</span>
-                        <button 
-                            className={`lang-btn ${lang === 'fr' ? 'active' : ''}`}
-                            onClick={() => setLang('fr')}
-                        >
-                            FR
-                        </button>
+                        <button className={`lang-btn ${lang === 'fr' ? 'active' : ''}`} onClick={() => { setLang('fr'); closeMobileMenu(); }}>FR</button>
                     </div>
                 </nav>
             </header>
 
             <main>
-                {/* Hero Section */}
                 <section className="hero">
                     <div className="hero-content">
                         <h1 style={{ whiteSpace: 'pre-line' }}>{t.hero.title}</h1>
                         <p style={{ whiteSpace: 'pre-line' }}>{t.hero.desc}</p>
-                        <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn">{t.hero.btn}</a>
+                        <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-shine">{t.hero.btn}</a>
                     </div>
-                    <div className="hero-image-wrapper">
-                        {/* 4. We gebruiken standaard img tags hier. Next.js heeft ook een <Image /> component voor nog snellere laadtijden, maar dit werkt perfect voor nu. */}
-                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" />
+                    {/* Parallax effect toegepast via inline style */}
+                    <div className="hero-image-wrapper" style={{ transform: `translateY(${offsetY * 0.15}px)` }}>
+                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" className="floating-img" />
                     </div>
                 </section>
 
-                {/* Services Section */}
                 <section className="services" id="services">
                     {selectedCategory === null ? (
                         <div className="transition-wrapper" key="grid">
-                            <h2>{t.services.title}</h2>
-                            <p style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>
-                                {t.services.desc}
-                            </p>
+                            <div className="reveal">
+                                <h2>{t.services.title}</h2>
+                                <p style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>{t.services.desc}</p>
+                            </div>
                             
                             <div className="services-grid">
-                                {categories.map((cat) => (
-                                    <article className="service-card" key={cat.id} onClick={() => setSelectedCategory(cat.id)}>
+                                {categories.map((cat, idx) => (
+                                    /* Scroll Reveal toegevoegd met vertraging per kaart */
+                                    <article 
+                                        className="service-card reveal" 
+                                        key={cat.id} 
+                                        onClick={() => setSelectedCategory(cat.id)}
+                                        style={{ transitionDelay: `${idx * 0.1}s` }}
+                                    >
                                         <div className="service-image">
                                             <img src={cat.img} alt={t.categories[cat.id].title} />
-                                            
                                         </div>
                                         <div className="service-content">
                                             <h3>{t.categories[cat.id].title}</h3>
@@ -499,7 +484,7 @@ export default function App() {
                             </div>
                         </div>
                     ) : (
-                        <div className="transition-wrapper" key="detail">
+                        <div className="transition-wrapper slide-up" key="detail">
                             <h2>{activeCategoryData.icon} {activeTranslationData.title}</h2>
                             <p style={{ maxWidth: '600px', margin: '0 auto' }}>{activeTranslationData.desc}</p>
                             
@@ -510,7 +495,7 @@ export default function App() {
                                 
                                 <div className="treatment-list">
                                     {activeTranslationData.treatments.map((treatment, idx) => (
-                                        <div className="treatment-item" key={idx}>
+                                        <div className="treatment-item reveal" key={idx} style={{ transitionDelay: `${idx * 0.05}s` }}>
                                             <div className="treatment-info">
                                                 <h4>{treatment.name}</h4>
                                             </div>
@@ -522,7 +507,7 @@ export default function App() {
                                 </div>
                                 
                                 <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-                                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn">
+                                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-shine">
                                         {t.services.book}
                                     </a>
                                 </div>
@@ -531,68 +516,38 @@ export default function App() {
                     )}
                 </section>
 
-                {/* Contact Section */}
-                <section className="contact" id="contact">
+                <section className="contact reveal" id="contact">
                     <h2>{t.contact.title}</h2>
-                    <p style={{ maxWidth: '600px', margin: '0 auto' }}>
-                        {t.contact.desc}
-                    </p>
+                    <p style={{ maxWidth: '600px', margin: '0 auto' }}>{t.contact.desc}</p>
                     
                     <div className="contact-container">
-                        <div className="contact-info">
+                        <div className="contact-info reveal">
                             <h3>{t.contact.infoTitle}</h3>
-                            <p>
-                                <span className="contact-icon">📍</span>
-                                <span>
-                                    <strong>{t.contact.address}</strong><br />
-                                    Rue de Ramskapelle 2<br />
-                                    1040 Etterbeek, Belgium
-                                </span>
-                            </p>
-                            <p>
-                                <span className="contact-icon">📞</span>
-                                <span>
-                                    <strong>{t.contact.phone}</strong><br />
-                                    +32 486 21 82 88 / 06 44 50 27 41
-                                </span>
-                            </p>
-                            <p>
-                                <span className="contact-icon">📧</span>
-                                <span>
-                                    <strong>{t.contact.email}</strong><br />
-                                    hello@skincareproject.be
-                                </span>
-                            </p>
+                            <p><span className="contact-icon">📍</span><span><strong>{t.contact.address}</strong><br />Rue de Ramskapelle 2<br />1040 Etterbeek, Belgium</span></p>
+                            <p><span className="contact-icon">📞</span><span><strong>{t.contact.phone}</strong><br />+32 486 21 82 88 / 06 44 50 27 41</span></p>
+                            <p><span className="contact-icon">📧</span><span><strong>{t.contact.email}</strong><br />hello@skincareproject.be</span></p>
                         </div>
-                        <div className="contact-hours">
+                        <div className="contact-hours reveal" style={{ transitionDelay: '0.2s' }}>
                             <h4 className="opening-hours-title">🕒 {t.contact.hoursTitle}</h4>
                             <div className="hours-grid">
                                 {t.contact.hours.map((h, idx) => (
                                     <div className="hour-row" key={idx}>
-                                        <span>{h.day}</span>
-                                        <span>{h.time}</span>
+                                        <span>{h.day}</span><span>{h.time}</span>
                                     </div>
                                 ))}
                             </div>
                             <p className="hours-note">{t.contact.hoursNote}</p>
                         </div>
-                        <div className="contact-map">
-                            {/* Google Maps Embed - Pas de link src=".." aan in je echte map! */}
+                        <div className="contact-map reveal" style={{ transitionDelay: '0.4s' }}>
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d488.6690063245935!2d4.400877082023608!3d50.83017508223242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project%20(%20Ladies%20only)!5e0!3m2!1snl!2sbe!4v1775423615423!5m2!1snl!2sbe"
-                                width="100%" 
-                                height="100%" 
-                                style={{ border: 0 }} 
-                                allowFullScreen={true}
-                                loading="lazy" 
-                                referrerPolicy="no-referrer-when-downgrade">
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5342931448834!2d4.3879201!3d50.8398188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project%20(%20Ladies%20only)!5e0!3m2!1snl!2sbe!4v1712200000000!5m2!1snl!2sbe"
+                                width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
                     </div>
                 </section>
             </main>
 
-            {/* Footer */}
             <footer style={{ backgroundColor: 'var(--primary-bg)', textAlign: 'center', padding: '4rem 5%', borderTop: '1px solid var(--borders)' }}>
                 <p style={{ fontWeight: '500', color: 'var(--heading-color)', marginBottom: '0.5rem', fontSize: '1.2rem' }}>Institut SkinCare Project</p>
                 <p style={{ color: '#888174', fontStyle: 'italic', marginBottom: '1.5rem' }}>
@@ -600,31 +555,18 @@ export default function App() {
                 </p>
                 <div className="social-icons" style={{ justifyContent: 'center', marginBottom: '1.5rem' }}>
                     <a href="https://www.facebook.com/InstitutSkinCareProject" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
-                        </a>
-                        
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                    </a>
                     <a href="https://www.instagram.com/iskcare" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
                 </div>
-                {/* Google Review Badge */}
                 <div className="review-badge-container">
-                  <a 
-                    href="https://www.google.com/search?q=Institut+Skin+Care+Project+Etterbeek#lrd=0x47c3c5300e70e4cd:0x2541e753c3464530,1" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="review-badge"
-                  >
+                  <a href="https://www.google.com/search?q=Institut+Skin+Care+Project+Etterbeek#lrd=0x47c3c5300e70e4cd:0x2541e753c3464530,1" target="_blank" rel="noopener noreferrer" className="review-badge">
                     <div className="badge-stars">⭐⭐⭐⭐⭐</div>
                     <div className="badge-text">
-                      <strong>5 / 5</strong> op Google Reviews
+                      <strong>5.0 / 5</strong> op Google Reviews
                       <span>(90+ reviews)</span>
-                    </div>
-                    <div className="badge-icon">
-                      {/* Een simpel Google G-icoontje of een pijltje */}
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
-                      </svg>
                     </div>
                   </a>
                 </div>
