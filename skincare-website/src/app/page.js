@@ -644,13 +644,7 @@ export default function App() {
                     </svg>
                 </a>
 
-                {/* NIEUW: Sticky Boekingsbalk voor Mobiel */}
-                <div className="mobile-sticky-bar">
-                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-shine">
-                        {t.mobileSticky}
-                    </a>
-                </div>
-
+               
                 <p>© 2026 {t.footer}</p>
                 <p>Rue de Ramskapelle 2, 1040 Etterbeek, Belgium</p>
             </footer>
