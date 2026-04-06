@@ -341,37 +341,19 @@ export default function App() {
     const [scrolled, setScrolled] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [lang, setLang] = useState('en');
-    
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [offsetY, setOffsetY] = useState(0);
     
     const t = translations[lang];
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
 
+    // Alleen header transparantie afhandelen, geen parallax of scroll-animaties meer.
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
-            setOffsetY(window.scrollY); 
         };
-        // RequestAnimationFrame optimaliseert de scroll snelheid
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    // Geoptimaliseerde Observer (zorgt dat het niet gaat stotteren)
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-active');
-                    obs.unobserve(entry.target); // Belangrijk: stopt observeren nadat het geladen is voor betere performance
-                }
-            });
-        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        return () => observer.disconnect();
-    }, [selectedCategory, lang]);
 
     useEffect(() => {
         if (selectedCategory !== null) {
@@ -434,31 +416,26 @@ export default function App() {
                         <p style={{ whiteSpace: 'pre-line' }}>{t.hero.desc}</p>
                         <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-shine">{t.hero.btn}</a>
                     </div>
-                    {/* Floating animatie zit nu op de container, Parallax op de img zelf, dit voorkomt stotteren! */}
+                    
                     <div className="hero-image-wrapper floating-wrapper">
-                        <img 
-                            src="/images/hero.webp" 
-                            alt="Luxurious Skincare Products" 
-                            style={{ transform: `translateY(${offsetY * 0.2}px)` }} 
-                        />
+                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" />
                     </div>
                 </section>
 
                 <section className="services" id="services">
                     {selectedCategory === null ? (
                         <div className="transition-wrapper" key="grid">
-                            <div className="reveal">
+                            <div>
                                 <h2>{t.services.title}</h2>
                                 <p style={{ maxWidth: '600px', margin: '0 auto 3rem' }}>{t.services.desc}</p>
                             </div>
                             
                             <div className="services-grid">
-                                {categories.map((cat, idx) => (
+                                {categories.map((cat) => (
                                     <article 
-                                        className="service-card reveal" 
+                                        className="service-card" 
                                         key={cat.id} 
                                         onClick={() => setSelectedCategory(cat.id)}
-                                        style={{ transitionDelay: `${idx * 0.1}s` }}
                                     >
                                         <div className="service-image">
                                             <img src={cat.img} alt={t.categories[cat.id].title} />
@@ -477,7 +454,7 @@ export default function App() {
                             </div>
                         </div>
                     ) : (
-                        <div className="transition-wrapper slide-up" key="detail">
+                        <div className="transition-wrapper" key="detail">
                             <h2>{activeCategoryData.icon} {activeTranslationData.title}</h2>
                             <p style={{ maxWidth: '600px', margin: '0 auto' }}>{activeTranslationData.desc}</p>
                             
@@ -488,7 +465,7 @@ export default function App() {
                                 
                                 <div className="treatment-list">
                                     {activeTranslationData.treatments.map((treatment, idx) => (
-                                        <div className="treatment-item reveal" key={idx} style={{ transitionDelay: `${idx * 0.05}s` }}>
+                                        <div className="treatment-item" key={idx}>
                                             <div className="treatment-info">
                                                 <h4>{treatment.name}</h4>
                                             </div>
@@ -509,18 +486,18 @@ export default function App() {
                     )}
                 </section>
 
-                <section className="contact reveal" id="contact">
+                <section className="contact" id="contact">
                     <h2>{t.contact.title}</h2>
                     <p style={{ maxWidth: '600px', margin: '0 auto' }}>{t.contact.desc}</p>
                     
                     <div className="contact-container">
-                        <div className="contact-info reveal">
+                        <div className="contact-info">
                             <h3>{t.contact.infoTitle}</h3>
                             <p><span className="contact-icon">📍</span><span><strong>{t.contact.address}</strong><br />Rue de Ramskapelle 2<br />1040 Etterbeek, Belgium</span></p>
                             <p><span className="contact-icon">📞</span><span><strong>{t.contact.phone}</strong><br />+32 486 21 82 88 / 06 44 50 27 41</span></p>
                             <p><span className="contact-icon">📧</span><span><strong>{t.contact.email}</strong><br />hello@skincareproject.be</span></p>
                         </div>
-                        <div className="contact-hours reveal" style={{ transitionDelay: '0.2s' }}>
+                        <div className="contact-hours">
                             <h4 className="opening-hours-title">🕒 {t.contact.hoursTitle}</h4>
                             <div className="hours-grid">
                                 {t.contact.hours.map((h, idx) => (
@@ -531,7 +508,7 @@ export default function App() {
                             </div>
                             <p className="hours-note">{t.contact.hoursNote}</p>
                         </div>
-                        <div className="contact-map reveal" style={{ transitionDelay: '0.4s' }}>
+                        <div className="contact-map">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5342931448834!2d4.3879201!3d50.8398188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project%20(%20Ladies%20only)!5e0!3m2!1snl!2sbe!4v1712200000000!5m2!1snl!2sbe"
                                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade">
