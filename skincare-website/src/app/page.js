@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 
-// Jouw vertalingen blijven precies hetzelfde
 const translations = {
     en: {
         nav: { home: "Home", treatments: "Treatments", contact: "Contact" },
@@ -343,39 +342,37 @@ export default function App() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [lang, setLang] = useState('en');
     
-    // Nieuwe state voor mobiel menu & parallax
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [offsetY, setOffsetY] = useState(0);
     
     const t = translations[lang];
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
 
-    // Scroll listener voor header, parallax en scroll-reveals
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
-            setOffsetY(window.scrollY); // Voor Parallax effect
+            setOffsetY(window.scrollY); 
         };
-        window.addEventListener('scroll', handleScroll);
+        // RequestAnimationFrame optimaliseert de scroll snelheid
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Observer voor het "fade-in" scroll effect
+    // Geoptimaliseerde Observer (zorgt dat het niet gaat stotteren)
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reveal-active');
+                    obs.unobserve(entry.target); // Belangrijk: stopt observeren nadat het geladen is voor betere performance
                 }
             });
-        }, { threshold: 0.1 }); // Activeert als 10% zichtbaar is
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
         return () => observer.disconnect();
-    }, [selectedCategory, lang]); // Opnieuw observeren bij categorie wissel
+    }, [selectedCategory, lang]);
 
-    // Scroll soepel naar de top van de services sectie bij openen categorie
     useEffect(() => {
         if (selectedCategory !== null) {
             const el = document.getElementById('services');
@@ -398,22 +395,15 @@ export default function App() {
     const activeCategoryData = selectedCategory ? categories.find(c => c.id === selectedCategory) : null;
     const activeTranslationData = selectedCategory ? t.categories[selectedCategory] : null;
 
-    // Sluit het mobiele menu na een klik
     const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     return (
         <React.Fragment>
             <header className={scrolled ? 'scrolled' : ''}>
-                <a href="#" className="logo">Institut SkinCare Project</a>
+                <a href="#" className="logo" onClick={() => setSelectedCategory(null)}>Institut SkinCare Project</a>
                 
-                {/* Hamburger Icoon voor Mobiel */}
-                <div 
-                    className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`} 
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    <span></span><span></span><span></span>
                 </div>
 
                 <nav className={`nav-links ${isMobileMenuOpen ? 'open' : ''}`}>
@@ -444,9 +434,13 @@ export default function App() {
                         <p style={{ whiteSpace: 'pre-line' }}>{t.hero.desc}</p>
                         <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="btn btn-shine">{t.hero.btn}</a>
                     </div>
-                    {/* Parallax effect toegepast via inline style */}
-                    <div className="hero-image-wrapper" style={{ transform: `translateY(${offsetY * 0.15}px)` }}>
-                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" className="floating-img" />
+                    {/* Floating animatie zit nu op de container, Parallax op de img zelf, dit voorkomt stotteren! */}
+                    <div className="hero-image-wrapper floating-wrapper">
+                        <img 
+                            src="/images/hero.webp" 
+                            alt="Luxurious Skincare Products" 
+                            style={{ transform: `translateY(${offsetY * 0.2}px)` }} 
+                        />
                     </div>
                 </section>
 
@@ -460,7 +454,6 @@ export default function App() {
                             
                             <div className="services-grid">
                                 {categories.map((cat, idx) => (
-                                    /* Scroll Reveal toegevoegd met vertraging per kaart */
                                     <article 
                                         className="service-card reveal" 
                                         key={cat.id} 
@@ -567,6 +560,11 @@ export default function App() {
                     <div className="badge-text">
                       <strong>5.0 / 5</strong> op Google Reviews
                       <span>(90+ reviews)</span>
+                    </div>
+                    <div className="badge-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+                      </svg>
                     </div>
                   </a>
                 </div>
