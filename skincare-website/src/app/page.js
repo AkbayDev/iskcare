@@ -493,37 +493,7 @@ export default function App() {
 
 
                 {/* NIEUW: Before & After Slider */}
-                <section className="before-after-section">
-                    <h2>{t.beforeAfter.title}</h2>
-                    <p style={{ marginBottom: '2rem' }}>{t.beforeAfter.desc}</p>
-                    
-                    <div className="slider-container">
-                        {/* 1. Voeg een before.webp foto toe in je images map! */}
-                        <img src="/images/after.webp.png" alt="Before treatment" className="image-after" />
-                        
-                        {/* 2. Voeg een after.webp foto toe in je images map! (Zelfde afmetingen als before) */}
-                        <img 
-                            src="/images/before.webp.jpg" 
-                            alt="After treatment" 
-                            className="image-before" 
-                            style={{ clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)` }}
-                        />
-                        
-                        <input 
-                            type="range" 
-                            min="0" max="100" 
-                            value={sliderPos} 
-                            onChange={(e) => setSliderPos(e.target.value)} 
-                            className="slider-input"
-                        />
-                        <div className="slider-line" style={{ left: `${sliderPos}%` }}>
-                            <div className="slider-button">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--heading-color)" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--heading-color)" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                
 
                 <section className="services" id="services">
                     {selectedCategory === null ? (
