@@ -487,7 +487,7 @@ export default function App() {
                     </div>
                     
                     <div className="hero-image-wrapper floating-wrapper">
-                        <img src="/images/salon.webp" alt="Luxurious Skincare Products" />
+                        <img src="/images/hero.webp" alt="Luxurious Skincare Products" />
                     </div>
                 </section>
 
