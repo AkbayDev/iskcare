@@ -404,15 +404,42 @@ export default function App() {
     }, [selectedCategory]);
 
     const categories = [
-        { id: 'korean-advanced', icon: "🆕", img: "/images/korean.webp" },
-        { id: 'deep-anti-aging', icon: "✨", img: "/images/deepantiage.webp" },
-        { id: 'chemical-peels', icon: "🧪", img: "/images/chemicalpeals.webp" },
-        { id: 'classic-facials', icon: "💆‍♀️", img: "/images/classic.webp" },
-        { id: 'waxing-services', icon: "🍯", img: "/images/waxing.webp" },
-        { id: 'waxing-packages', icon: "📦", img: "/images/waxing2.webp" },
-        { id: 'eye-beauty', icon: "👁️", img: "/images/eye.webp" },
-        { id: 'hand-foot-beauty', icon: "💅", img: "/images/nails.webp" },
-        { id: 'makeup-bridal', icon: "💄", img: "/images/makeup.webp" }
+        {
+            id: 'korean-advanced',
+            img: "/images/korean.webp"
+        },
+        {
+            id: 'deep-anti-aging',
+            img: "/images/deepantiage.webp"
+        },
+        {
+            id: 'chemical-peels',
+            img: "/images/chemicalpeals.webp" // Lokale afbeelding in de public map
+        },
+        {
+            id: 'classic-facials',
+            img: "/images/classic.webp"
+        },
+        {
+            id: 'waxing-services',
+            img: "/images/waxing.webp"
+        },
+        {
+            id: 'waxing-packages',
+            img: "/images/waxing2.webp"
+        },
+        {
+            id: 'eye-beauty',
+            img: "/images/eye.webp"
+        },
+        {
+            id: 'hand-foot-beauty',
+            img: "/images/nails.webp"
+        },
+        {
+            id: 'makeup-bridal',
+            img: "/images/makeup.webp"
+        }
     ];
 
     const activeCategoryData = selectedCategory ? categories.find(c => c.id === selectedCategory) : null;
@@ -582,9 +609,28 @@ export default function App() {
                     <div className="contact-container">
                         <div className="contact-info">
                             <h3>{t.contact.infoTitle}</h3>
-                            <p><span className="contact-icon">📍</span><span><strong>{t.contact.address}</strong><br />Rue de Ramskapelle 2<br />1040 Etterbeek, Belgium</span></p>
-                            <p><span className="contact-icon">📞</span><span><strong>{t.contact.phone}</strong><br />+32 486 21 82 88 / 06 44 50 27 41</span></p>
-                            <p><span className="contact-icon">📧</span><span><strong>{t.contact.email}</strong><br />hello@skincareproject.be</span></p>
+                            <p>
+                                <span className="contact-icon">📍</span>
+                                <span>
+                                    <strong>{t.contact.address}</strong><br />
+                                    Rue de Ramskapelle 2<br />
+                                    1040 Etterbeek, Belgium
+                                </span>
+                            </p>
+                            <p>
+                                <span className="contact-icon">📞</span>
+                                <span>
+                                    <strong>{t.contact.phone}</strong><br />
+                                    +32 486 21 82 88
+                                </span>
+                            </p>
+                            <p>
+                                <span className="contact-icon">📧</span>
+                                <span>
+                                    <strong>{t.contact.email}</strong><br />
+                                    iskcareproject@gmail.be
+                                </span>
+                            </p>
                         </div>
                         <div className="contact-hours">
                             <h4 className="opening-hours-title">🕒 {t.contact.hoursTitle}</h4>
