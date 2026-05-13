@@ -370,47 +370,38 @@ export default function App() {
     const categories = [
         {
             id: 'korean-advanced',
-            icon: "🆕",
             img: "/images/korean.webp"
         },
         {
             id: 'deep-anti-aging',
-            icon: "✨",
             img: "/images/deepantiage.webp"
         },
         {
             id: 'chemical-peels',
-            icon: "🧪",
             img: "/images/chemicalpeals.webp" // Lokale afbeelding in de public map
         },
         {
             id: 'classic-facials',
-            icon: "💆‍♀️",
             img: "/images/classic.webp"
         },
         {
             id: 'waxing-services',
-            icon: "🍯",
             img: "/images/waxing.webp"
         },
         {
             id: 'waxing-packages',
-            icon: "📦",
             img: "/images/waxing2.webp"
         },
         {
             id: 'eye-beauty',
-            icon: "👁️",
             img: "/images/eye.webp"
         },
         {
             id: 'hand-foot-beauty',
-            icon: "💅",
             img: "/images/nails.webp"
         },
         {
             id: 'makeup-bridal',
-            icon: "💄",
             img: "/images/makeup.webp"
         }
     ];
@@ -553,14 +544,14 @@ export default function App() {
                                 <span className="contact-icon">📞</span>
                                 <span>
                                     <strong>{t.contact.phone}</strong><br />
-                                    +32 486 21 82 88 / 06 44 50 27 41
+                                    +32 486 21 82 88
                                 </span>
                             </p>
                             <p>
                                 <span className="contact-icon">📧</span>
                                 <span>
                                     <strong>{t.contact.email}</strong><br />
-                                    hello@skincareproject.be
+                                    iskcareproject@gmail.be
                                 </span>
                             </p>
                         </div>
