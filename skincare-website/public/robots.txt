@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.iskcare.be/sitemap.xml
+Sitemap: https://iskcare.be/sitemap.xml

@@ -36,19 +36,19 @@ export const metadata = {
   ],
   robots: { index: true, follow: true },
   alternates: {
-    canonical: "https://www.iskcare.be",
+    canonical: "https://iskcare.be",
   },
   openGraph: {
     title: "Institut SkinCare Project | Premium Skincare Clinic Brussels",
     description:
       "Book your luxury facial, anti-aging, or Korean skincare treatment at our calming clinic in Etterbeek, Brussels. 90+ five-star Google reviews.",
-    url: "https://www.iskcare.be",
+    url: "https://iskcare.be",
     siteName: "Institut SkinCare Project",
     locale: "fr_BE",
     type: "website",
     images: [
       {
-        url: "https://www.iskcare.be/images/hero.webp",
+        url: "https://iskcare.be/images/hero.webp",
         width: 1200,
         height: 630,
         alt: "Institut SkinCare Project — Premium skincare clinic in Brussels",
@@ -60,7 +60,7 @@ export const metadata = {
     title: "Institut SkinCare Project | Skincare Clinic Brussels",
     description:
       "Premium anti-aging, microneedling & Korean skincare treatments in Etterbeek, Brussels.",
-    images: ["https://www.iskcare.be/images/hero.webp"],
+    images: ["https://iskcare.be/images/hero.webp"],
   },
 };
 
@@ -71,10 +71,10 @@ const jsonLd = {
   alternateName: "ISKCare Project",
   description:
     "Premium skincare clinic specializing in Korean skincare, anti-aging treatments, microneedling, chemical peels, waxing, and beauty services in Etterbeek, Brussels.",
-  url: "https://www.iskcare.be",
+  url: "https://iskcare.be",
   telephone: "+32486218288",
   email: "iskcareproject@gmail.be",
-  image: "https://www.iskcare.be/images/hero.webp",
+  image: "https://iskcare.be/images/hero.webp",
   priceRange: "€€",
   address: {
     "@type": "PostalAddress",
