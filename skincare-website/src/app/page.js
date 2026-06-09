@@ -105,11 +105,9 @@ export default function App() {
                 <a href="#philosophy" className="nav-link">{t.nav.philosophy}</a>
                 <a href="#treatments" className="nav-link">{t.nav.treatments}</a>
                 
-                <MagneticButton>
-                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn">
-                        {t.nav.book}
-                    </a>
-                </MagneticButton>
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn hoverable">
+                    {t.nav.book}
+                </a>
 
                 <div className="lang-toggle-minimal">
                     <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>EN</button>
@@ -267,11 +265,9 @@ export default function App() {
                                                 </div>
 
                                                 <div style={{ marginTop: '3rem' }}>
-                                                    <MagneticButton>
-                                                        <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', display: 'inline-block' }}>
-                                                            {t.nav.book}
-                                                        </a>
-                                                    </MagneticButton>
+                                                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn hoverable" style={{ fontSize: '1.1rem', padding: '1rem 2.5rem', display: 'inline-block' }}>
+                                                        {t.nav.book}
+                                                    </a>
                                                 </div>
                                             </div>
                                         )}
@@ -286,11 +282,9 @@ export default function App() {
                 <footer className="footer-immersive">
                     <h2 className="text-huge footer-title">{t.footer.title}</h2>
                     
-                    <MagneticButton>
-                        <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn" style={{ fontSize: '1.5rem', padding: '1rem 3rem', marginTop: '2rem' }}>
-                            {t.footer.book}
-                        </a>
-                    </MagneticButton>
+                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn hoverable" style={{ fontSize: '1.5rem', padding: '1rem 3rem', marginTop: '2rem' }}>
+                        {t.footer.book}
+                    </a>
 
                     <div className="footer-details">
                         <a 
