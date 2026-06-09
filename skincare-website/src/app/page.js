@@ -19,6 +19,7 @@ export default function App() {
 
     const t = translations[lang];
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
+    const whatsappUrl = "https://wa.me/32486218288";
 
     useGSAP(() => {
         // Hero Animations
@@ -303,6 +304,13 @@ export default function App() {
                     </div>
                 </footer>
             </main>
+
+            {/* WhatsApp Floating Button (Mobile Only) */}
+            <a href={whatsappUrl} className="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+                <svg viewBox="0 0 32 32" width="28" height="28" fill="white">
+                    <path d="M16.002 0c-8.835 0-16 7.165-16 16 0 2.82.735 5.56 2.135 8.012l-2.115 7.733 7.915-2.077c2.395 1.282 5.096 1.96 7.868 1.96h.005c8.832 0 16-7.165 16-16s-7.17-16-16.008-16zm8.13 22.955c-.342.964-1.956 1.83-2.734 1.93-.733.093-1.637.245-4.832-1.077-3.86-1.597-6.326-5.545-6.52-5.8-.19-.258-1.558-2.075-1.558-3.957 0-1.882.983-2.81 1.332-3.187.35-.378.765-.472 1.023-.472.257 0 .515.004.737.014.23.01.543-.09.848.65.31.753 1.054 2.57 1.144 2.76.092.188.152.41.026.66-.122.253-.186.41-.373.63-.187.218-.396.47-.565.65-.187.195-.386.41-.17.783.216.37 1.034 1.705 2.247 2.785 1.567 1.396 2.89 1.83 3.264 2.016.374.19.59.158.81-.093.22-.25 1.032-1.203 1.31-1.616.276-.413.553-.346.892-.22.34.125 2.146 1.01 2.515 1.196.37.19.615.285.706.442.09.158.09 1.02-.25 1.984z"></path>
+                </svg>
+            </a>
         </div>
     );
 }
