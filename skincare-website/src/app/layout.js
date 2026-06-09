@@ -1,4 +1,6 @@
 import { Playfair_Display, Inter } from "next/font/google";
+import SmoothScroller from "@/components/SmoothScroller";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -122,7 +124,12 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <CustomCursor />
+        <SmoothScroller>
+          {children}
+        </SmoothScroller>
+      </body>
     </html>
   );
 }
