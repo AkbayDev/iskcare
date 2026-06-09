@@ -288,7 +288,7 @@ export default function App() {
 
                     <div className="footer-details">
                         <a 
-                            href="https://www.google.com/maps/place/Institut+Skincare+Project/@50.8398188,4.3879201,15z" 
+                            href="https://www.google.com/maps/search/?api=1&query=Institut+Skincare+Project+Etterbeek" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="hoverable"
