@@ -494,3 +494,79 @@ a { text-decoration: none; color: inherit; }
 
 /* GSAP Utilities */
 .split-line { overflow: hidden; display: block; }
+
+/* ============================================
+   SERVICE MODAL
+   ============================================ */
+.service-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm);
+}
+
+.service-modal-content {
+    background: var(--c-bg-light);
+    color: var(--c-text);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.service-modal-content::-webkit-scrollbar { display: none; }
+
+.modal-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--c-text);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.modal-close-btn:hover { opacity: 1; }
+
+.treatments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.treatment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.treatment-name {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.treatment-price {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--c-accent);
+}
+
+@media (max-width: 768px) {
+    .service-modal-content { padding: 2rem; }
+    .treatment-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}

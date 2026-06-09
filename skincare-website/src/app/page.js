@@ -1,82 +1,21 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import MagneticButton from '@/components/MagneticButton';
+import { translations } from '@/data/translations';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const translations = {
-    en: {
-        nav: { philosophy: "Philosophy", treatments: "Treatments", book: "Book Now" },
-        hero: {
-            kicker: "Institut SkinCare Project",
-            title: "Reveal Your\nNatural Radiance",
-            subtitle: "Luxurious anti-aging facials and bespoke skincare in the heart of Brussels."
-        },
-        philosophy: {
-            title: "The Philosophy",
-            text1: "With a deep passion for advanced dermatology and holistic beauty, I founded Institut SkinCare Project to offer treatments that actually work.",
-            text2: "I specialize in Korean skincare, advanced anti-aging protocols, and personalized care. Every skin is unique, and together we will find the perfect tailored solution to reveal your natural glow.",
-            text3: "Welcome to your new beauty haven."
-        },
-        services: {
-            title: "Signature Treatments",
-            categories: [
-                { id: 'korean', title: "Korean Advanced", desc: "Cutting-edge therapies like Co2 & Jet Plasma.", img: "/images/korean.webp" },
-                { id: 'antiaging', title: "Deep Anti-Aging", desc: "Intensive treatments for lasting results.", img: "/images/deepantiage.webp" },
-                { id: 'peels', title: "Chemical Peels", desc: "Targeted peeling solutions.", img: "/images/chemicalpeals.webp" },
-                { id: 'classic', title: "Classic Facials", desc: "Traditional, tailored treatments.", img: "/images/classic.webp" },
-                { id: 'waxing', title: "Waxing", desc: "Professional hair removal.", img: "/images/waxing.webp" },
-                { id: 'eyes', title: "Eye Beauty", desc: "Lash and brow enhancements.", img: "/images/eye.webp" }
-            ]
-        },
-        footer: {
-            title: "Ready to glow?",
-            address: "Rue de Ramskapelle 2\n1040 Etterbeek, Belgium",
-            contact: "+32 486 21 82 88\niskcareproject@gmail.be",
-            book: "Book Your Experience"
-        }
-    },
-    fr: {
-        nav: { philosophy: "Philosophie", treatments: "Soins", book: "Réserver" },
-        hero: {
-            kicker: "Institut SkinCare Project",
-            title: "Révélez votre\néclat naturel",
-            subtitle: "Des soins anti-âge luxueux et sur mesure au cœur de Bruxelles."
-        },
-        philosophy: {
-            title: "La Philosophie",
-            text1: "Passionnée par la dermatologie avancée et la beauté holistique, j'ai fondé l'Institut SkinCare Project pour offrir des soins qui fonctionnent vraiment.",
-            text2: "Je suis spécialisée dans les soins coréens, les protocoles anti-âge avancés et les soins personnalisés. Chaque peau est unique.",
-            text3: "Bienvenue dans votre nouveau havre de beauté."
-        },
-        services: {
-            title: "Soins Signatures",
-            categories: [
-                { id: 'korean', title: "Soins Coréens", desc: "Thérapies de pointe : Co2, Jet Plasma.", img: "/images/korean.webp" },
-                { id: 'antiaging', title: "Anti-âge Profond", desc: "Soins intensifs durables.", img: "/images/deepantiage.webp" },
-                { id: 'peels', title: "Peelings Chimiques", desc: "Solutions ciblées.", img: "/images/chemicalpeals.webp" },
-                { id: 'classic', title: "Soins Classiques", desc: "Soins sur mesure.", img: "/images/classic.webp" },
-                { id: 'waxing', title: "Épilation", desc: "Épilation professionnelle.", img: "/images/waxing.webp" },
-                { id: 'eyes', title: "Beauté du Regard", desc: "Cils et sourcils.", img: "/images/eye.webp" }
-            ]
-        },
-        footer: {
-            title: "Prête à rayonner ?",
-            address: "Rue de Ramskapelle 2\n1040 Etterbeek, Belgique",
-            contact: "+32 486 21 82 88\niskcareproject@gmail.be",
-            book: "Réservez votre expérience"
-        }
-    }
-};
-
 export default function App() {
     const [lang, setLang] = useState('en');
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const containerRef = useRef(null);
     const galleryTrackRef = useRef(null);
+    const modalRef = useRef(null);
+    const modalContentRef = useRef(null);
 
     const t = translations[lang];
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
@@ -144,7 +83,27 @@ export default function App() {
             repeat: -1
         });
 
-    }, { dependencies: [lang], scope: containerRef });
+        // Modal Animation
+        if (selectedCategory) {
+            document.body.style.overflow = 'hidden';
+            gsap.fromTo(modalRef.current, 
+                { opacity: 0, backdropFilter: "blur(0px)" }, 
+                { opacity: 1, backdropFilter: "blur(20px)", duration: 0.4, ease: "power2.out" }
+            );
+            gsap.fromTo(modalContentRef.current,
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", delay: 0.1 }
+            );
+        } else {
+            document.body.style.overflow = '';
+        }
+
+    }, { dependencies: [lang, selectedCategory], scope: containerRef });
+
+    const closeModal = () => {
+        gsap.to(modalRef.current, { opacity: 0, backdropFilter: "blur(0px)", duration: 0.3 });
+        gsap.to(modalContentRef.current, { y: 50, opacity: 0, duration: 0.3, onComplete: () => setSelectedCategory(null) });
+    };
 
     return (
         <div ref={containerRef}>
@@ -269,16 +228,16 @@ export default function App() {
                     >
                         <div className="gallery-track">
                             {t.services.categories.map((cat, idx) => (
-                                <a 
-                                    href={bookingUrl} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="gallery-card" 
+                                <button 
+                                    className="gallery-card hoverable" 
                                     key={idx}
+                                    style={{ border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer' }}
                                     onClickCapture={(e) => {
                                         const track = galleryTrackRef.current;
                                         if (track && track.startX && Math.abs(e.pageX - track.startX) > 10) {
-                                            e.preventDefault(); // Prevent navigating if dragged
+                                            e.preventDefault(); // Prevent opening if dragged
+                                        } else {
+                                            setSelectedCategory(cat);
                                         }
                                     }}
                                 >
@@ -287,7 +246,7 @@ export default function App() {
                                         <h3 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{cat.title}</h3>
                                         <p style={{ opacity: 0.8 }}>{cat.desc}</p>
                                     </div>
-                                </a>
+                                </button>
                             ))}
                         </div>
                     </div>
@@ -319,6 +278,31 @@ export default function App() {
                         </p>
                     </div>
                 </footer>
+                {/* MODAL FOR SERVICES */}
+                {selectedCategory && (
+                    <div className="service-modal-overlay" ref={modalRef} onClick={closeModal}>
+                        <div className="service-modal-content" ref={modalContentRef} onClick={e => e.stopPropagation()}>
+                            <button className="modal-close-btn hoverable" onClick={closeModal} aria-label="Close Modal">✕</button>
+                            <h2 className="text-xl" style={{ marginBottom: '1rem' }}>{selectedCategory.title}</h2>
+                            <p style={{ fontSize: '1.2rem', color: 'var(--c-text-light)', marginBottom: '2rem' }}>{selectedCategory.desc}</p>
+                            
+                            <div className="treatments-list">
+                                {selectedCategory.treatments?.map((treatment, i) => (
+                                    <div className="treatment-item" key={i}>
+                                        <span className="treatment-name">{treatment.name}</span>
+                                        <span className="treatment-price">{treatment.price}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <MagneticButton>
+                                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn" style={{ fontSize: '1.2rem', padding: '1rem 2.5rem', marginTop: '2rem', display: 'inline-block' }}>
+                                    {t.nav.book}
+                                </a>
+                            </MagneticButton>
+                        </div>
+                    </div>
+                )}
             </main>
         </div>
     );
