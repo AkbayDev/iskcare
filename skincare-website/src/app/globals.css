@@ -613,4 +613,10 @@ a { text-decoration: none; color: inherit; }
     .whatsapp-float:active {
         transform: scale(0.95);
     }
+
+    /* Disable custom cursor on mobile to prevent blurry spot */
+    .custom-cursor-dot,
+    .custom-cursor-ring {
+        display: none !important;
+    }
 }
