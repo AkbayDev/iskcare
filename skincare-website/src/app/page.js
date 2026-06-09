@@ -83,26 +83,27 @@ export default function App() {
             repeat: -1
         });
 
-        // Modal Animation
+        // Drawer Animation
         if (selectedCategory) {
-            document.body.style.overflow = 'hidden';
             gsap.fromTo(modalRef.current, 
-                { opacity: 0, backdropFilter: "blur(0px)" }, 
-                { opacity: 1, backdropFilter: "blur(20px)", duration: 0.4, ease: "power2.out" }
+                { height: 0, opacity: 0 }, 
+                { height: 'auto', opacity: 1, duration: 0.6, ease: "power3.out" }
             );
-            gsap.fromTo(modalContentRef.current,
-                { y: 100, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", delay: 0.1 }
-            );
-        } else {
-            document.body.style.overflow = '';
+            // Scroll to the drawer so it's fully visible
+            setTimeout(() => {
+                if (modalRef.current) {
+                    modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 100);
         }
 
     }, { dependencies: [lang, selectedCategory], scope: containerRef });
 
-    const closeModal = () => {
-        gsap.to(modalRef.current, { opacity: 0, backdropFilter: "blur(0px)", duration: 0.3 });
-        gsap.to(modalContentRef.current, { y: 50, opacity: 0, duration: 0.3, onComplete: () => setSelectedCategory(null) });
+    const closeDrawer = () => {
+        gsap.to(modalRef.current, { 
+            height: 0, opacity: 0, duration: 0.4, ease: "power3.in",
+            onComplete: () => setSelectedCategory(null) 
+        });
     };
 
     return (
@@ -252,6 +253,40 @@ export default function App() {
                     </div>
                 </section>
 
+                {/* INLINE DRAWER FOR SERVICES */}
+                <div 
+                    ref={modalRef} 
+                    className="service-drawer" 
+                    style={{ overflow: 'hidden', height: 0, opacity: 0, backgroundColor: 'var(--c-bg-light)', color: 'var(--c-text)' }}
+                >
+                    {selectedCategory && (
+                        <div className="service-drawer-content" style={{ padding: '4rem var(--space-md)', position: 'relative' }}>
+                            <button className="modal-close-btn hoverable" onClick={closeDrawer} aria-label="Close Drawer" style={{ top: '2rem', right: '2rem' }}>✕</button>
+                            <div className="drawer-header" style={{ marginBottom: '3rem', maxWidth: '800px' }}>
+                                <h2 className="text-xl" style={{ marginBottom: '1rem' }}>{selectedCategory.title}</h2>
+                                <p style={{ fontSize: '1.2rem', color: 'var(--c-text-light)' }}>{selectedCategory.desc}</p>
+                            </div>
+                            
+                            <div className="treatments-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+                                {selectedCategory.treatments?.map((treatment, i) => (
+                                    <div className="treatment-item-box" key={i} style={{ borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '1rem' }}>
+                                        <div className="treatment-name" style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '0.5rem' }}>{treatment.name}</div>
+                                        <div className="treatment-price" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', color: 'var(--c-accent)' }}>{treatment.price}</div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div style={{ marginTop: '4rem' }}>
+                                <MagneticButton>
+                                    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn" style={{ fontSize: '1.2rem', padding: '1rem 3rem', display: 'inline-block' }}>
+                                        {t.nav.book}
+                                    </a>
+                                </MagneticButton>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
                 {/* IMMERSIVE FOOTER */}
                 <footer className="footer-immersive">
                     <h2 className="text-huge footer-title">{t.footer.title}</h2>
@@ -278,31 +313,6 @@ export default function App() {
                         </p>
                     </div>
                 </footer>
-                {/* MODAL FOR SERVICES */}
-                {selectedCategory && (
-                    <div className="service-modal-overlay" ref={modalRef} onClick={closeModal}>
-                        <div className="service-modal-content" ref={modalContentRef} onClick={e => e.stopPropagation()}>
-                            <button className="modal-close-btn hoverable" onClick={closeModal} aria-label="Close Modal">✕</button>
-                            <h2 className="text-xl" style={{ marginBottom: '1rem' }}>{selectedCategory.title}</h2>
-                            <p style={{ fontSize: '1.2rem', color: 'var(--c-text-light)', marginBottom: '2rem' }}>{selectedCategory.desc}</p>
-                            
-                            <div className="treatments-list">
-                                {selectedCategory.treatments?.map((treatment, i) => (
-                                    <div className="treatment-item" key={i}>
-                                        <span className="treatment-name">{treatment.name}</span>
-                                        <span className="treatment-price">{treatment.price}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <MagneticButton>
-                                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="nav-btn" style={{ fontSize: '1.2rem', padding: '1rem 2.5rem', marginTop: '2rem', display: 'inline-block' }}>
-                                    {t.nav.book}
-                                </a>
-                            </MagneticButton>
-                        </div>
-                    </div>
-                )}
             </main>
         </div>
     );
