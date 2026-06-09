@@ -259,7 +259,7 @@ export default function App() {
                                                 
                                                 <div className="treatments-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
                                                     {cat.treatments?.map((treatment, i) => (
-                                                        <div className="treatment-item-box" key={i} style={{ borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem' }}>
+                                                        <div className="treatment-item-box" key={i} style={{ borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', opacity: 0, animation: `fadeIn 0.5s forwards ${0.3 + i * 0.05}s` }}>
                                                             <div className="treatment-name" style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '0.3rem' }}>{treatment.name}</div>
                                                             <div className="treatment-price" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: 'var(--c-accent)' }}>{treatment.price}</div>
                                                         </div>
