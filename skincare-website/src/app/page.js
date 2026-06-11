@@ -34,10 +34,10 @@ export default function App() {
             height: Math.random() * 50 + 50 + 'vw',
             top: Math.random() * 100 + '%', // Scatter across the entire scroll height
             left: Math.random() * 100 + '%',
-            // Mix of very soft pinks with 1 or 2 darker swirls
-            color: Math.random() > 0.8 ? '#c87f89' : (Math.random() > 0.5 ? '#f0c4c8' : '#fbe9ec'),
-            animationDuration: Math.random() * 20 + 25 + 's',
-            animationDelay: '-' + (Math.random() * 30) + 's',
+            // Mix of very soft pinks with a slightly darker (but not too dark) swirl
+            color: Math.random() > 0.8 ? '#dfaeb6' : (Math.random() > 0.5 ? '#f4ccd1' : '#fdf2f4'),
+            animationDuration: Math.random() * 30 + 40 + 's', // 40s to 70s for a very slow, calm drift
+            animationDelay: '-' + (Math.random() * 50) + 's',
         }));
         setBlobs(newBlobs);
     }, []);

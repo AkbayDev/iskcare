@@ -224,10 +224,11 @@ a { text-decoration: none; color: inherit; }
 }
 
 @keyframes oceanDrift {
-    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    33% { transform: translate(-40%, -60%) scale(1.2) rotate(45deg); }
-    66% { transform: translate(-60%, -40%) scale(0.8) rotate(-45deg); }
-    100% { transform: translate(-30%, -70%) scale(1.1) rotate(90deg); }
+    0% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-20%, -30%) scale(1.1); }
+    50% { transform: translate(-80%, -40%) scale(0.9); }
+    75% { transform: translate(-30%, -80%) scale(1.15); }
+    100% { transform: translate(-50%, -50%) scale(1); }
 }
 
 /* Dream Hero */
