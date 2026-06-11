@@ -23,16 +23,7 @@ export default function App() {
     const whatsappUrl = "https://wa.me/32486218288";
 
     useGSAP(() => {
-        // Global Background Animation
-        gsap.to(".global-background-abstract", {
-            rotate: 360,
-            scale: 1.2,
-            duration: 20,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
-        });
-
+        // Hero title animations
         gsap.from(".hero-title-line", {
             y: 150,
             opacity: 0,
@@ -102,7 +93,13 @@ export default function App() {
 
     return (
         <div ref={containerRef}>
-            <div className="global-background-abstract"></div>
+            {/* FLUID DYNAMIC BACKGROUND */}
+            <div className="global-background-container">
+                <div className="blob blob-1"></div>
+                <div className="blob blob-2"></div>
+                <div className="blob blob-3"></div>
+            </div>
+
             {/* FLOATING NAVIGATION */}
             <nav className="nav-island glass-panel" aria-label="Main Navigation">
                 <a href="#philosophy" className="nav-link">{t.nav.philosophy}</a>
