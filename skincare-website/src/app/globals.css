@@ -205,52 +205,29 @@ a { text-decoration: none; color: inherit; }
 
 /* Global Animated Background Container */
 .global-background-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
     background: #fff8f9; /* extremely light pastel pink base */
 }
 
-/* Fluid Blobs */
-.blob {
+/* Fluid Ocean Blobs */
+.ocean-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.7; /* Softened opacity */
-    animation: drift 25s infinite alternate ease-in-out;
+    filter: blur(120px);
+    opacity: 0.6;
+    transform: translate(-50%, -50%);
+    animation: oceanDrift 30s infinite alternate ease-in-out;
 }
 
-.blob-1 {
-    width: 80vw; height: 80vw;
-    background: #fbe9ec; /* soft light pink */
-    top: -10%; left: -10%;
-    animation-duration: 30s;
-}
-
-.blob-2 {
-    width: 70vw; height: 70vw;
-    background: #f0c4c8; /* medium rose */
-    bottom: -20%; right: -10%;
-    animation-duration: 25s;
-    animation-delay: -5s;
-}
-
-.blob-3 {
-    width: 60vw; height: 60vw;
-    background: #c87f89; /* darker pink swirl */
-    top: 30%; left: 20%;
-    animation-duration: 35s;
-    animation-delay: -10s;
-}
-
-@keyframes drift {
-    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-    33% { transform: translate(10vw, -10vh) scale(1.1) rotate(10deg); }
-    66% { transform: translate(-10vw, 15vh) scale(0.9) rotate(-10deg); }
-    100% { transform: translate(5vw, 20vh) scale(1.2) rotate(5deg); }
+@keyframes oceanDrift {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    33% { transform: translate(-40%, -60%) scale(1.2) rotate(45deg); }
+    66% { transform: translate(-60%, -40%) scale(0.8) rotate(-45deg); }
+    100% { transform: translate(-30%, -70%) scale(1.1) rotate(90deg); }
 }
 
 /* Dream Hero */

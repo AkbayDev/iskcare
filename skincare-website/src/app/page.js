@@ -22,44 +22,27 @@ export default function App() {
     const bookingUrl = "https://salonkee.be/salon/institut-skincare-project";
     const whatsappUrl = "https://wa.me/32486218288";
 
+    // Dynamic ocean blobs state
+    const [blobs, setBlobs] = useState([]);
+
+    useEffect(() => {
+        // Generate random ocean blobs on client mount so it's different every load
+        // and doesn't cause hydration errors.
+        const newBlobs = Array.from({ length: 8 }).map((_, i) => ({
+            id: i,
+            width: Math.random() * 50 + 50 + 'vw', // 50vw to 100vw
+            height: Math.random() * 50 + 50 + 'vw',
+            top: Math.random() * 100 + '%', // Scatter across the entire scroll height
+            left: Math.random() * 100 + '%',
+            // Mix of very soft pinks with 1 or 2 darker swirls
+            color: Math.random() > 0.8 ? '#c87f89' : (Math.random() > 0.5 ? '#f0c4c8' : '#fbe9ec'),
+            animationDuration: Math.random() * 20 + 25 + 's',
+            animationDelay: '-' + (Math.random() * 30) + 's',
+        }));
+        setBlobs(newBlobs);
+    }, []);
+
     useGSAP(() => {
-        // Parallax Background Swirls
-        gsap.to(".blob-1", {
-            yPercent: -20,
-            ease: "none",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-
-        gsap.to(".blob-2", {
-            yPercent: 30,
-            xPercent: 10,
-            ease: "none",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-
-        gsap.to(".blob-3", {
-            yPercent: -50,
-            xPercent: -20,
-            rotate: 45,
-            ease: "none",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-
         // Hero title animations
         gsap.from(".hero-title-line", {
             y: 150,
@@ -129,12 +112,24 @@ export default function App() {
     };
 
     return (
-        <div ref={containerRef}>
-            {/* FLUID DYNAMIC BACKGROUND */}
+        <div ref={containerRef} style={{ position: 'relative' }}>
+            {/* FLUID DYNAMIC OCEAN BACKGROUND */}
             <div className="global-background-container">
-                <div className="blob blob-1"></div>
-                <div className="blob blob-2"></div>
-                <div className="blob blob-3"></div>
+                {blobs.map(blob => (
+                    <div 
+                        key={blob.id} 
+                        className="ocean-blob" 
+                        style={{
+                            width: blob.width,
+                            height: blob.height,
+                            top: blob.top,
+                            left: blob.left,
+                            background: blob.color,
+                            animationDuration: blob.animationDuration,
+                            animationDelay: blob.animationDelay
+                        }}
+                    ></div>
+                ))}
             </div>
 
             {/* FLOATING NAVIGATION */}
