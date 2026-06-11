@@ -211,7 +211,7 @@ a { text-decoration: none; color: inherit; }
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
-    background: #fff0f3; /* richer pinkish-white base */
+    background: #fff8f9; /* extremely light pastel pink base */
 }
 
 /* Fluid Blobs */
@@ -219,30 +219,30 @@ a { text-decoration: none; color: inherit; }
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
-    opacity: 0.85;
-    animation: drift 20s infinite alternate ease-in-out;
+    opacity: 0.7; /* Softened opacity */
+    animation: drift 25s infinite alternate ease-in-out;
 }
 
 .blob-1 {
-    width: 75vw; height: 75vw;
-    background: #e5989b; /* richer dusty rose */
+    width: 80vw; height: 80vw;
+    background: #fbe9ec; /* soft light pink */
     top: -10%; left: -10%;
-    animation-duration: 25s;
+    animation-duration: 30s;
 }
 
 .blob-2 {
-    width: 65vw; height: 65vw;
-    background: #ffb5a7; /* vibrant peach-rose */
+    width: 70vw; height: 70vw;
+    background: #f0c4c8; /* medium rose */
     bottom: -20%; right: -10%;
-    animation-duration: 22s;
+    animation-duration: 25s;
     animation-delay: -5s;
 }
 
 .blob-3 {
-    width: 70vw; height: 70vw;
-    background: #b56576; /* dark rose for depth */
-    top: 40%; left: 30%;
-    animation-duration: 28s;
+    width: 60vw; height: 60vw;
+    background: #c87f89; /* darker pink swirl */
+    top: 30%; left: 20%;
+    animation-duration: 35s;
     animation-delay: -10s;
 }
 

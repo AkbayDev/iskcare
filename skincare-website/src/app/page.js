@@ -23,6 +23,43 @@ export default function App() {
     const whatsappUrl = "https://wa.me/32486218288";
 
     useGSAP(() => {
+        // Parallax Background Swirls
+        gsap.to(".blob-1", {
+            yPercent: -20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        gsap.to(".blob-2", {
+            yPercent: 30,
+            xPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        gsap.to(".blob-3", {
+            yPercent: -50,
+            xPercent: -20,
+            rotate: 45,
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
         // Hero title animations
         gsap.from(".hero-title-line", {
             y: 150,
