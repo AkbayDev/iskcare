@@ -112,6 +112,16 @@ export const translations = {
                 }
             ]
         },
+        testimonials: {
+            subtitle: "REVIEWS",
+            title: "What our clients say",
+            reviews: [
+                { text: "L’endroit est d’une propreté incroyable et décoré avec goût, on s’y sent direct apaisée. Prestation de très haute qualité.", author: "Elona T." },
+                { text: "Une expérience vraiment agréable ! Aziza est super gentille, attentionnée et très professionnelle. Je recommande à 100%.", author: "Safia T." },
+                { text: "Institut irréprochable au niveau de l’hygiène avec un accueil super chaleureux. Des soins exceptionnels !", author: "Soumeya S." },
+                { text: "Une première pour moi à l'institut skincare project, les locaux sont d'une beauté et d'une propreté inégalables. Je reviendrai !", author: "G. V." }
+            ]
+        },
         footer: {
             title: "Ready to glow?",
             address: "Rue de Ramskapelle 2\n1040 Etterbeek, Belgium",
@@ -230,6 +240,16 @@ export const translations = {
                         { name: "Teinture des sourcils et épilation", price: "20 €" }
                     ]
                 }
+            ]
+        },
+        testimonials: {
+            subtitle: "AVIS CLIENTS",
+            title: "Ce qu'elles en pensent",
+            reviews: [
+                { text: "L’endroit est d’une propreté incroyable et décoré avec goût, on s’y sent direct apaisée. Prestation de très haute qualité.", author: "Elona T." },
+                { text: "Une expérience vraiment agréable ! Aziza est super gentille, attentionnée et très professionnelle. Je recommande à 100%.", author: "Safia T." },
+                { text: "Institut irréprochable au niveau de l’hygiène avec un accueil super chaleureux. Des soins exceptionnels !", author: "Soumeya S." },
+                { text: "Une première pour moi à l'institut skincare project, les locaux sont d'une beauté et d'une propreté inégalables. Je reviendrai !", author: "G. V." }
             ]
         },
         footer: {

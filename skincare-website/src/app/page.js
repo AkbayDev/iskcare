@@ -10,8 +10,9 @@ import { translations } from '@/data/translations';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
-    const [lang, setLang] = useState('en');
+    const [lang, setLang] = useState('fr');
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [activeTestimonial, setActiveTestimonial] = useState(0);
     const containerRef = useRef(null);
     const galleryTrackRef = useRef(null);
     const modalRef = useRef(null);
@@ -170,6 +171,48 @@ export default function App() {
                     </div>
                 </section>
 
+                {/* TESTIMONIALS */}
+                <section className="testimonials-section reveal" aria-label="Client testimonials" style={{ padding: 'var(--space-md) var(--space-sm)', textAlign: 'center', backgroundColor: 'var(--c-bg-light)' }}>
+                    <span className="section-subtitle" style={{ display: 'block', marginBottom: '1rem' }}>{t.testimonials.subtitle}</span>
+                    <h2 style={{ marginBottom: '4rem', fontSize: 'clamp(2rem, 5vw, 4rem)' }}>{t.testimonials.title}</h2>
+
+                    <div className="testimonials-carousel" style={{ position: 'relative', maxWidth: '800px', margin: '0 auto', minHeight: '200px' }}>
+                        {t.testimonials.reviews.map((review, idx) => (
+                            <div
+                                key={idx}
+                                style={{
+                                    position: idx === activeTestimonial ? 'relative' : 'absolute',
+                                    top: 0, left: 0, width: '100%',
+                                    opacity: idx === activeTestimonial ? 1 : 0,
+                                    transform: idx === activeTestimonial ? 'translateY(0)' : 'translateY(20px)',
+                                    transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                                    pointerEvents: idx === activeTestimonial ? 'auto' : 'none'
+                                }}
+                            >
+                                <blockquote style={{ fontSize: 'clamp(1.2rem, 3vw, 2rem)', fontStyle: 'italic', marginBottom: '2rem', lineHeight: 1.4 }}>
+                                    "{review.text}"
+                                </blockquote>
+                                <p style={{ fontSize: '1rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.1em' }}>— {review.author}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="testimonial-dots" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
+                        {t.testimonials.reviews.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setActiveTestimonial(idx)}
+                                aria-label={`Testimonial ${idx + 1}`}
+                                style={{
+                                    width: '12px', height: '12px', borderRadius: '50%', border: 'none',
+                                    backgroundColor: idx === activeTestimonial ? 'var(--c-accent)' : 'var(--c-border)',
+                                    cursor: 'pointer', transition: 'background-color 0.3s ease'
+                                }}
+                            />
+                        ))}
+                    </div>
+                </section>
+
                 {/* HORIZONTAL GALLERY */}
                 <section className="gallery-container" id="treatments">
                     <div className="gallery-header">
@@ -301,6 +344,18 @@ export default function App() {
                             <a href="tel:+32486218288" className="hoverable">+32 486 21 82 88</a><br />
                             <a href="mailto:iskcareproject@gmail.be" className="hoverable">iskcareproject@gmail.be</a>
                         </p>
+                    </div>
+
+                    <div className="footer-map" style={{ marginTop: '3rem', width: '100%', maxWidth: '800px', height: '250px', borderRadius: 'var(--radius-card)', overflow: 'hidden' }}>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.508535496464!2d4.3828974!3d50.832788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project!5e0!3m2!1sen!2sbe!4v1700000000000!5m2!1sen!2sbe" 
+                            width="100%" 
+                            height="100%" 
+                            style={{ border: 0, filter: 'grayscale(100%) opacity(0.8)' }} 
+                            allowFullScreen="" 
+                            loading="lazy" 
+                            referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
                     </div>
                 </footer>
             </main>
