@@ -36,8 +36,8 @@ export default function App() {
             left: Math.random() * 100 + '%',
             // Mix of very soft pinks with a slightly darker (but not too dark) swirl
             color: Math.random() > 0.8 ? '#dfaeb6' : (Math.random() > 0.5 ? '#f4ccd1' : '#fdf2f4'),
-            animationDuration: Math.random() * 30 + 40 + 's', // 40s to 70s for a very slow, calm drift
-            animationDelay: '-' + (Math.random() * 50) + 's',
+            animationDuration: Math.random() * 8 + 12 + 's', // 12s to 20s for visible, smooth dynamic movement
+            animationDelay: '-' + (Math.random() * 20) + 's',
         }));
         setBlobs(newBlobs);
     }, []);
