@@ -23,8 +23,8 @@ export default function App() {
     const whatsappUrl = "https://wa.me/32486218288";
 
     useGSAP(() => {
-        // Hero Animations
-        gsap.to(".hero-background-abstract", {
+        // Global Background Animation
+        gsap.to(".global-background-abstract", {
             rotate: 360,
             scale: 1.2,
             duration: 20,
@@ -102,6 +102,7 @@ export default function App() {
 
     return (
         <div ref={containerRef}>
+            <div className="global-background-abstract"></div>
             {/* FLOATING NAVIGATION */}
             <nav className="nav-island glass-panel" aria-label="Main Navigation">
                 <a href="#philosophy" className="nav-link">{t.nav.philosophy}</a>
@@ -121,7 +122,6 @@ export default function App() {
             <main>
                 {/* DREAM HERO */}
                 <section className="hero-dream" id="home">
-                    <div className="hero-background-abstract"></div>
                     <div className="hero-content">
                         <span className="text-caption hero-fade">{t.hero.kicker}</span>
                         <h1 className="text-huge">
@@ -172,7 +172,7 @@ export default function App() {
                 </section>
 
                 {/* TESTIMONIALS */}
-                <section className="testimonials-section reveal" aria-label="Client testimonials" style={{ padding: 'var(--space-lg) var(--space-sm)', textAlign: 'center', backgroundColor: 'var(--c-bg-muted)' }}>
+                <section className="testimonials-section reveal" aria-label="Client testimonials" style={{ padding: 'var(--space-lg) var(--space-sm)', textAlign: 'center', backgroundColor: 'transparent' }}>
                     <span className="text-caption" style={{ display: 'block', marginBottom: '0.75rem' }}>{t.testimonials.subtitle}</span>
                     <h2 style={{ marginBottom: '3rem', fontSize: 'clamp(1.8rem, 4.5vw, 3.5rem)' }}>{t.testimonials.title}</h2>
 
