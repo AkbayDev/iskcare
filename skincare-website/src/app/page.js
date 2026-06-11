@@ -347,12 +347,12 @@ export default function App() {
                         </p>
                     </div>
 
-                    <div className="footer-map" style={{ marginTop: '3rem', width: '100%', maxWidth: '800px', height: '250px', borderRadius: 'var(--radius-card)', overflow: 'hidden' }}>
+                    <div className="footer-map" style={{ marginTop: '3rem', width: '100%', maxWidth: '800px', height: '250px', borderRadius: 'var(--radius-card)', overflow: 'hidden', backgroundColor: 'var(--c-bg-deep)' }}>
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.508535496464!2d4.3828974!3d50.832788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project!5e0!3m2!1sen!2sbe!4v1700000000000!5m2!1sen!2sbe" 
                             width="100%" 
                             height="100%" 
-                            style={{ border: 0, filter: 'grayscale(100%) sepia(100%) hue-rotate(290deg) saturate(300%) contrast(0.9) opacity(0.9)' }} 
+                            style={{ border: 0, filter: 'grayscale(100%) opacity(0.8)', mixBlendMode: 'multiply' }} 
                             allowFullScreen="" 
                             loading="lazy" 
                             referrerPolicy="no-referrer-when-downgrade"
