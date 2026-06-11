@@ -138,9 +138,9 @@ export const translations = {
         },
         philosophy: {
             title: "La Philosophie",
-            text1: "Passionnée par la dermatologie avancée et la beauté holistique, j'ai fondé l'Institut SkinCare Project pour offrir des soins qui fonctionnent vraiment.",
-            text2: "Je suis spécialisée dans les soins coréens, les protocoles anti-âge avancés et les soins personnalisés. Chaque peau est unique.",
-            text3: "Bienvenue dans votre nouveau havre de beauté."
+            text1: "Passionnée par la dermatologie avancée et la beauté holistique, j'ai fondé l'Institut SkinCare Project pour offrir des soins aux résultats prouvés.",
+            text2: "Mon expertise se concentre sur la cosmétologie coréenne, les protocoles anti-âge de pointe et les traitements sur mesure. Parce que chaque peau est unique, nous concevons ensemble le soin idéal pour sublimer votre visage.",
+            text3: "Bienvenue dans votre nouvel écrin de beauté."
         },
         services: {
             title: "Soins Signatures",
@@ -152,92 +152,92 @@ export const translations = {
                     img: "/images/korean.webp",
                     treatments: [
                         { name: "Thérapie Co2 Anti-âge", price: "115 €" },
-                        { name: "Lifting contour de l'œil + soin liftant Threadlift", price: "115 €" },
-                        { name: "Jet plasma + soin liftant Vtox (Cure de 3 séances)", price: "120 €" },
-                        { name: "Thérapie avancée anti-acné", price: "95 €" },
-                        { name: "Ilumin + V-Tox", price: "95 €" },
-                        { name: "Microneedling aux peptides + masque biocellulaire", price: "90 €" },
-                        { name: "Cold Peel (Anti-âge, réduit le mélasma)", price: "90 €" },
-                        { name: "INFLACURE (Pour rosacée, couperose et inflammation)", price: "75 €" }
+                        { name: "Lifting contour des yeux + Fils tenseurs Threadlift", price: "115 €" },
+                        { name: "Jet plasma + Soin liftant Vtox (Cure de 3 séances)", price: "120 €" },
+                        { name: "Soin expert anti-acné", price: "95 €" },
+                        { name: "Soin Ilumin + V-Tox", price: "95 €" },
+                        { name: "Microneedling peptidique + Masque biocellulose", price: "90 €" },
+                        { name: "Cold Peel (Anti-âge, cible les taches pigmentaires)", price: "90 €" },
+                        { name: "INFLACURE (Spécial rosacée, couperose et inflammations)", price: "75 €" }
                     ]
                 },
                 { 
                     id: 'antiaging', 
                     title: "Anti-âge Profond", 
-                    desc: "Soins intensifs durables.", 
+                    desc: "Traitements intensifs aux résultats durables.", 
                     img: "/images/deepantiage.webp",
                     treatments: [
-                        { name: "Relâchement cutané des joues", price: "450 €" },
-                        { name: "Éclaircissement des cernes", price: "350 €" },
-                        { name: "Ride du lion + front", price: "250 €" },
-                        { name: "Soulèvement sourcilière", price: "250 €" },
-                        { name: "Élévation de la paupière", price: "250 €" },
-                        { name: "Rides de la patte d'oie", price: "150 €" }
+                        { name: "Lifting raffermissant des joues", price: "450 €" },
+                        { name: "Traitement anti-cernes et éclat", price: "350 €" },
+                        { name: "Lissage de la ride du lion et du front", price: "250 €" },
+                        { name: "Rehaussement des sourcils (Brow Lift)", price: "250 €" },
+                        { name: "Lifting tenseur des paupières", price: "250 €" },
+                        { name: "Lissage des rides de la patte d'oie", price: "150 €" }
                     ]
                 },
                 { 
                     id: 'peels', 
-                    title: "Peelings Chimiques", 
-                    desc: "Solutions ciblées.", 
+                    title: "Peelings Professionnels", 
+                    desc: "Des solutions ciblées pour faire peau neuve.", 
                     img: "/images/chemicalpeals.webp",
                     treatments: [
-                        { name: "Peeling - Peau Réactive", price: "95 €" },
-                        { name: "Peeling - Anti-acné", price: "90 €" },
-                        { name: "Peeling - Anti-âge", price: "85 €" },
-                        { name: "Peeling - Peau terne", price: "85 €" },
-                        { name: "Peeling - Hydratant", price: "85 €" }
+                        { name: "Peeling Doux - Peaux sensibles", price: "95 €" },
+                        { name: "Peeling Purifiant - Anti-acné", price: "90 €" },
+                        { name: "Peeling Régénérant - Anti-âge", price: "85 €" },
+                        { name: "Peeling Éclat - Peaux ternes", price: "85 €" },
+                        { name: "Peeling Hydratant - Peaux sèches", price: "85 €" }
                     ]
                 },
                 { 
                     id: 'classic', 
-                    title: "Soins Classiques", 
-                    desc: "Soins sur mesure.", 
+                    title: "Soins Essentiels", 
+                    desc: "L'excellence des soins traditionnels.", 
                     img: "/images/classic.webp",
                     treatments: [
-                        { name: "Soin du visage - Anti-âge", price: "85 €" },
-                        { name: "Soin du visage - Peau grasse", price: "80 €" },
-                        { name: "Soin du visage - Peaux réactives", price: "75 €" },
-                        { name: "Soin du visage - Coup d'éclat", price: "65 €" }
+                        { name: "Soin Essentiel Anti-âge", price: "85 €" },
+                        { name: "Soin Purifiant - Peaux grasses", price: "80 €" },
+                        { name: "Soin Apaisant - Peaux réactives", price: "75 €" },
+                        { name: "Soin Vitalité & Coup d'éclat", price: "65 €" }
                     ]
                 },
                 { 
                     id: 'waxing', 
                     title: "Épilation", 
-                    desc: "Épilation professionnelle.", 
+                    desc: "Une épilation douce et professionnelle.", 
                     img: "/images/waxing.webp",
                     treatments: [
-                        { name: "Pack Full Body", price: "120 €" },
-                        { name: "Pack Full Body Basic", price: "95 €" },
-                        { name: "Pack Pré-Vacances", price: "80 €" },
-                        { name: "Pack Summer Body", price: "75 €" },
-                        { name: "Pack Body Express", price: "65 €" },
+                        { name: "Forfait Corps Complet", price: "120 €" },
+                        { name: "Forfait Corps Essentiel", price: "95 €" },
+                        { name: "Forfait Départ en Vacances", price: "80 €" },
+                        { name: "Forfait Summer Body", price: "75 €" },
+                        { name: "Forfait Corps Express", price: "65 €" },
                         { name: "Combo : Demi-jambes, aisselles et maillot intégral", price: "65 €" },
-                        { name: "Pack Bikini intégral + Fesses", price: "55 €" },
-                        { name: "Bikini intégral + fesses", price: "45 €" },
-                        { name: "Pack Bikini Essentiel", price: "40 €" },
+                        { name: "Forfait Maillot intégral + Inter-fessier", price: "55 €" },
+                        { name: "Maillot intégral + Inter-fessier", price: "45 €" },
+                        { name: "Forfait Maillot Essentiel", price: "40 €" },
                         { name: "Jambes complètes", price: "35 €" },
                         { name: "Visage complet", price: "35 €" },
                         { name: "Maillot échancré", price: "30 €" },
-                        { name: "Bikini simple", price: "25 €" },
+                        { name: "Maillot classique", price: "25 €" },
                         { name: "Demi-jambes", price: "25 €" },
                         { name: "Bras complets", price: "25 €" },
-                        { name: "Sourcils + lèvre supérieure", price: "20 €" },
+                        { name: "Création sourcils + lèvre supérieure", price: "20 €" },
                         { name: "Aisselles", price: "15 €" }
                     ]
                 },
                 { 
                     id: 'eyes', 
                     title: "Beauté du Regard", 
-                    desc: "Cils et sourcils.", 
+                    desc: "Sublimez vos cils et sourcils.", 
                     img: "/images/eye.webp",
                     treatments: [
-                        { name: "Extension de cils - Volume", price: "85 €" },
-                        { name: "Extension de cils - Naturelle", price: "85 €" },
-                        { name: "Rehaussement et teinture des cils", price: "60 €" },
-                        { name: "Extension de cils - Découverte", price: "50 €" },
-                        { name: "Rehaussement des cils", price: "50 €" },
-                        { name: "Retrait d'extensions de cils", price: "25 €" },
-                        { name: "Teinture des sourcils et épilation", price: "20 €" }
+                        { name: "Extensions de cils - Volume Russe", price: "85 €" },
+                        { name: "Extensions de cils - Effet Naturel", price: "85 €" },
+                        { name: "Lash Lift (Rehaussement) & Teinture", price: "60 €" },
+                        { name: "Extensions de cils - Pose Découverte", price: "50 €" },
+                        { name: "Lash Lift (Rehaussement)", price: "50 €" },
+                        { name: "Dépose d'extensions de cils", price: "25 €" },
+                        { name: "Restructuration & Teinture des sourcils", price: "20 €" }
                     ]
                 }
             ]
@@ -249,7 +249,7 @@ export const translations = {
                 { text: "L’endroit est d’une propreté incroyable et décoré avec goût, on s’y sent direct apaisée. Prestation de très haute qualité.", author: "Elona T." },
                 { text: "Une expérience vraiment agréable ! Aziza est super gentille, attentionnée et très professionnelle. Je recommande à 100%.", author: "Safia T." },
                 { text: "Institut irréprochable au niveau de l’hygiène avec un accueil super chaleureux. Des soins exceptionnels !", author: "Soumeya S." },
-                { text: "Une première pour moi à l'institut skincare project, les locaux sont d'une beauté et d'une propreté inégalables. Je reviendrai !", author: "G. V." }
+                { text: "Une première pour moi à l'Institut SkinCare Project, les locaux sont d'une beauté et d'une propreté inégalables. Je reviendrai !", author: "G. V." }
             ]
         },
         footer: {
