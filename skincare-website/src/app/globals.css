@@ -7,16 +7,19 @@
    ============================================ */
 
 :root {
-    /* Color Palette */
-    --c-bg-light: #fff5f7;
-    --c-bg-deep: #fce8ea;
-    --c-accent: #df9b9e;
-    --c-accent-dark: #c9787c;
-    --c-text: #4a3b3c;
-    --c-text-light: #8a7678;
+    /* Color Palette — refined for harmony */
+    --c-bg-light: #fff6f8;      /* Warmest white, barely pink */
+    --c-bg-deep: #f9e4e7;       /* Soft blush for section contrast */
+    --c-bg-muted: #fef0f2;      /* In-between — testimonials, subtle breaks */
+    --c-accent: #d4919a;         /* Muted rose — primary accent */
+    --c-accent-soft: #e8bec3;    /* Lighter rose — borders, separators */
+    --c-accent-dark: #b86b72;    /* Deep rose — text emphasis, CTAs */
+    --c-text: #3d2f30;           /* Rich warm charcoal — stronger contrast */
+    --c-text-light: #7d686a;    /* Muted mauve-grey for secondary text */
+    --c-border: rgba(180, 140, 145, 0.15); /* Transparent rose dividers */
     
     /* Gradients */
-    --grad-dream: linear-gradient(120deg, #fff5f7 0%, #fce8ea 40%, #f3c5c8 100%);
+    --grad-dream: linear-gradient(135deg, #fff8f9 0%, #fbe9ec 45%, #f0c4c8 100%);
     
     /* Layout & Spacing */
     --space-sm: clamp(1rem, 2vw, 2rem);
@@ -25,17 +28,17 @@
     --space-xl: clamp(6rem, 15vw, 15rem);
     
     /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-bg: rgba(255, 255, 255, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.65);
     --glass-blur: blur(24px);
-    --glass-shadow: 0 8px 32px 0 rgba(223, 155, 158, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(180, 107, 114, 0.1);
 
     /* Typography */
     --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
     --font-body: var(--font-inter), 'Inter', -apple-system, sans-serif;
     
     --radius-pill: 100px;
-    --radius-card: 24px;
+    --radius-card: 20px;
 }
 
 * { box-sizing: border-box; }
@@ -68,29 +71,30 @@ h1, h2, h3, h4 {
     font-family: var(--font-heading);
     font-weight: 400;
     margin: 0;
-    line-height: 1;
-    letter-spacing: -0.03em;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--c-text);
 }
 
 .text-huge {
-    font-size: clamp(4rem, 12vw, 12rem);
+    font-size: clamp(3.5rem, 11vw, 11rem);
     text-align: center;
     line-height: 0.9;
 }
 
 .text-xl {
-    font-size: clamp(3rem, 8vw, 8rem);
+    font-size: clamp(2.5rem, 7vw, 6rem);
 }
 
 .text-lg {
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(1.8rem, 4.5vw, 3.5rem);
 }
 
 .text-caption {
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     font-weight: 600;
     color: var(--c-accent-dark);
 }
@@ -138,17 +142,18 @@ a { text-decoration: none; color: inherit; }
 .nav-btn {
     background: var(--c-text);
     color: var(--c-bg-light);
-    padding: 0.6rem 1.2rem;
+    padding: 0.65rem 1.4rem;
     border-radius: var(--radius-pill);
     font-size: 0.85rem;
     font-weight: 600;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
     cursor: pointer;
 }
 .nav-btn:hover {
     background: var(--c-accent-dark);
-    transform: scale(1.05);
+    transform: scale(1.04);
+    box-shadow: 0 4px 20px rgba(184, 107, 114, 0.3);
 }
 
 .lang-toggle-minimal {
@@ -300,13 +305,15 @@ a { text-decoration: none; color: inherit; }
    INFINITE MARQUEE SECTION
    ============================================ */
 .marquee-section {
-    padding: var(--space-lg) 0;
+    padding: var(--space-md) 0;
     background: var(--c-bg-light);
     overflow: hidden;
     white-space: nowrap;
     position: relative;
     display: flex;
     align-items: center;
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
 }
 
 .marquee-content {
@@ -317,10 +324,9 @@ a { text-decoration: none; color: inherit; }
 }
 
 .marquee-text {
-    font-size: clamp(3rem, 6vw, 6rem);
+    font-size: clamp(2.5rem, 5vw, 5rem);
     font-family: var(--font-heading);
-    color: var(--c-accent);
-    opacity: 0.8;
+    color: var(--c-accent-soft);
     text-transform: uppercase;
     font-style: italic;
     display: flex;
@@ -329,8 +335,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 .marquee-separator {
-    width: 15px; height: 15px;
-    background: var(--c-accent-dark);
+    width: 10px; height: 10px;
+    background: var(--c-accent);
     border-radius: 50%;
     display: inline-block;
 }
@@ -443,7 +449,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Big Footer */
 .footer-immersive {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -453,21 +459,30 @@ a { text-decoration: none; color: inherit; }
     text-align: center;
     position: relative;
     overflow: hidden;
-    padding: var(--space-md);
+    padding: var(--space-lg) var(--space-md);
+    gap: 0.5rem;
 }
 
 .footer-immersive h2 {
     color: var(--c-bg-light);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .footer-details {
     display: flex;
     gap: 4rem;
-    margin-top: 4rem;
+    margin-top: 3rem;
     font-family: var(--font-body);
     font-size: 0.9rem;
     opacity: 0.7;
+    line-height: 1.8;
+}
+
+.footer-details a {
+    transition: opacity 0.3s ease;
+}
+.footer-details a:hover {
+    opacity: 1;
 }
 
 /* ============================================

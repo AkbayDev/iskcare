@@ -172,11 +172,20 @@ export default function App() {
                 </section>
 
                 {/* TESTIMONIALS */}
-                <section className="testimonials-section reveal" aria-label="Client testimonials" style={{ padding: 'var(--space-md) var(--space-sm)', textAlign: 'center', backgroundColor: 'var(--c-bg-light)' }}>
-                    <span className="section-subtitle" style={{ display: 'block', marginBottom: '1rem' }}>{t.testimonials.subtitle}</span>
-                    <h2 style={{ marginBottom: '4rem', fontSize: 'clamp(2rem, 5vw, 4rem)' }}>{t.testimonials.title}</h2>
+                <section className="testimonials-section reveal" aria-label="Client testimonials" style={{ padding: 'var(--space-lg) var(--space-sm)', textAlign: 'center', backgroundColor: 'var(--c-bg-muted)' }}>
+                    <span className="text-caption" style={{ display: 'block', marginBottom: '0.75rem' }}>{t.testimonials.subtitle}</span>
+                    <h2 style={{ marginBottom: '3rem', fontSize: 'clamp(1.8rem, 4.5vw, 3.5rem)' }}>{t.testimonials.title}</h2>
 
-                    <div className="testimonials-carousel" style={{ position: 'relative', maxWidth: '800px', margin: '0 auto', minHeight: '200px' }}>
+                    {/* Google Stars */}
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '0.3rem', marginBottom: '3rem' }}>
+                        {[...Array(5)].map((_, i) => (
+                            <svg key={i} width="20" height="20" viewBox="0 0 24 24" fill="var(--c-accent-dark)" stroke="none">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        ))}
+                    </div>
+
+                    <div className="testimonials-carousel" style={{ position: 'relative', maxWidth: '700px', margin: '0 auto', minHeight: '180px' }}>
                         {t.testimonials.reviews.map((review, idx) => (
                             <div
                                 key={idx}
@@ -184,30 +193,33 @@ export default function App() {
                                     position: idx === activeTestimonial ? 'relative' : 'absolute',
                                     top: 0, left: 0, width: '100%',
                                     opacity: idx === activeTestimonial ? 1 : 0,
-                                    transform: idx === activeTestimonial ? 'translateY(0)' : 'translateY(20px)',
+                                    transform: idx === activeTestimonial ? 'translateY(0)' : 'translateY(15px)',
                                     transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                                     pointerEvents: idx === activeTestimonial ? 'auto' : 'none'
                                 }}
                             >
-                                <blockquote style={{ fontSize: 'clamp(1.2rem, 3vw, 2rem)', fontStyle: 'italic', marginBottom: '2rem', lineHeight: 1.4 }}>
-                                    "{review.text}"
+                                <blockquote style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.6rem)', fontStyle: 'italic', marginBottom: '1.5rem', lineHeight: 1.6, color: 'var(--c-text)', fontFamily: 'var(--font-heading)' }}>
+                                    &ldquo;{review.text}&rdquo;
                                 </blockquote>
-                                <p style={{ fontSize: '1rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.1em' }}>— {review.author}</p>
+                                <p style={{ fontSize: '0.85rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--c-accent-dark)' }}>— {review.author}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div className="testimonial-dots" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
+                    <div className="testimonial-dots" style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginTop: '2.5rem' }}>
                         {t.testimonials.reviews.map((_, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => setActiveTestimonial(idx)}
                                 aria-label={`Testimonial ${idx + 1}`}
                                 style={{
-                                    width: '12px', height: '12px', borderRadius: '50%', 
-                                    border: '2px solid var(--c-accent)',
-                                    backgroundColor: idx === activeTestimonial ? 'var(--c-accent)' : 'transparent',
-                                    cursor: 'pointer', transition: 'background-color 0.3s ease'
+                                    width: idx === activeTestimonial ? '28px' : '10px',
+                                    height: '10px',
+                                    borderRadius: 'var(--radius-pill)', 
+                                    border: 'none',
+                                    backgroundColor: idx === activeTestimonial ? 'var(--c-accent-dark)' : 'var(--c-accent-soft)',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
                                 }}
                             />
                         ))}
@@ -300,11 +312,11 @@ export default function App() {
                                                     <button className="hoverable" onClick={() => setSelectedCategory(null)} style={{ background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', opacity: 0.5 }}>✕</button>
                                                 </div>
                                                 
-                                                <div className="treatments-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+                                                <div className="treatments-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
                                                     {cat.treatments?.map((treatment, i) => (
-                                                        <div className="treatment-item-box" key={i} style={{ borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '0.5rem', opacity: 0, animation: `fadeIn 0.5s forwards ${0.3 + i * 0.05}s` }}>
-                                                            <div className="treatment-name" style={{ fontSize: '1.1rem', fontWeight: 500, marginBottom: '0.3rem' }}>{treatment.name}</div>
-                                                            <div className="treatment-price" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: 'var(--c-accent)' }}>{treatment.price}</div>
+                                                        <div className="treatment-item-box" key={i} style={{ borderBottom: '1px solid var(--c-border)', paddingBottom: '0.75rem', paddingTop: '0.75rem', opacity: 0, animation: `fadeIn 0.5s forwards ${0.3 + i * 0.05}s` }}>
+                                                            <div className="treatment-name" style={{ fontSize: '1rem', fontWeight: 500, marginBottom: '0.25rem', color: 'var(--c-text)' }}>{treatment.name}</div>
+                                                            <div className="treatment-price" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', color: 'var(--c-accent-dark)', fontWeight: 500 }}>{treatment.price}</div>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -347,12 +359,12 @@ export default function App() {
                         </p>
                     </div>
 
-                    <div className="footer-map" style={{ marginTop: '3rem', width: '100%', maxWidth: '800px', height: '250px', borderRadius: 'var(--radius-card)', overflow: 'hidden', backgroundColor: '#fcdfe4' }}>
+                    <div className="footer-map" style={{ marginTop: '3rem', width: '100%', maxWidth: '800px', height: '250px', borderRadius: 'var(--radius-card)', overflow: 'hidden', backgroundColor: '#fde8ec' }}>
                         <iframe 
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.508535496464!2d4.3828974!3d50.832788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c5300e70e4cd%3A0x2541e753c3464530!2sInstitut%20Skin%20Care%20Project!5e0!3m2!1sen!2sbe!4v1700000000000!5m2!1sen!2sbe" 
                             width="100%" 
                             height="100%" 
-                            style={{ border: 0, filter: 'grayscale(100%) opacity(0.6)', mixBlendMode: 'multiply' }} 
+                            style={{ border: 0, filter: 'grayscale(100%) opacity(0.5)', mixBlendMode: 'multiply' }} 
                             allowFullScreen="" 
                             loading="lazy" 
                             referrerPolicy="no-referrer-when-downgrade"
